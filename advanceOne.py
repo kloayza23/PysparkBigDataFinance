@@ -3,22 +3,21 @@ import numpy as np
 import pandas as pd
 import sklearn as sk
 import matplotlib as mpl 
-
-import pyspark as pys
+from pyspark import SparkContext
 from pyspark.sql import SQLContext
-
-sc = pys.SparkContext('local', 'pyspark tutorial') 
+sc = SparkContext('local', 'pyspark tutorial') 
 sqlContext = SQLContext(sc)
 sc.addPyFile('pyspark_csv.py')
 import pyspark_csv as pycsv
-
-plaintext_rdd = sc.textFile('loan_t1.csv')
-dataframe = pycsv.csvToDataFrame(sqlContext, plaintext_rdd, sep=";")
-print(dataframe.describe())
-
-
-
-
+#plaintext_rdd = sc.textFile('loan_t1.csv')
+#lines_rdd = sc.textFile('loan_t1.csv')
+#rdd_temp_K =lines_rdd.map(lambda x: x + 273).take(3)
+print(rdd_temp_K)  
+# dataframe = pycsv.csvToDataFrame(sqlContext, plaintext_rdd, sep=";")
+# data_sort_np=np.array(dataframe)	
+# for index,item_data in enumerate(data_sort_np):
+# 	print(item_data)
+#print(dataframe.describe())
 # train_filename = "loan_t1.csv"
 # train_data = pd.read_csv(train_filename, sep=";", encoding="ISO-8859-1")
 # X_train = train_data.loc[:,'loan_amnt':]
