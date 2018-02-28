@@ -1,0 +1,52 @@
+loan_status
+0: NULL
+1: Fully Paid
+2: Charged Off
+3: Current
+4: Default
+5: In Grace Period
+6: Late (31-120 days)
+
+term
+
+0: NULL
+1: 36 months
+2: 60 months
+
+grade:
+
+0: NULL
+1: A
+2: B
+3: C
+so on
+
+subgrade:
+
+0: NULL
+1: A1
+2: A2
+so on
+6: B1
+so on
+
+emplen
+
+0: NULL
+1: < 1 year
+2: 2 years
+so on
+
+
+hoow
+
+0: NULL
+1: MORTAGE
+2: OWN
+3: RENT
+so on
+
+
+
+
+

@@ -1,0 +1,123 @@
+Name	Type	Nullable	Description
+AsOfDate	String	No	As of date
+id	Integer	No	A unique LC assigned ID for the loan listing.
+memberId	Integer	No	A unique LC assigned Id for the borrower member.
+term	Integer	No	The Number of payments on the loan. Values are in months and can be either 36 or 60.
+intRate	Number	No	Interest Rate on the loan
+expDefaultRate	Number	No	The expected default rate of the loan.
+serviceFeeRate	Number	No	Service fee rate paid by the investor for this loan.
+installment	Number	No	The monthly payment owed by the borrower if the loan originates.
+grade	String	No	LC assigned loan grade
+subGrade	String	No	LC assigned loan subgrade
+empLength	Integer	Yes	Employment length in months. Possible values are whole numbers from 0 and higher. Null indicates not employed.
+homeOwnership	String	Yes	The home ownership status provided by the borrower during registration or obtained from the credit report. Our values are: RENT, OWN, MORTGAGE, OTHER
+annualInc	Number	Yes	The annual income provided by the borrower during registration.
+isIncV	String	Yes	Indicates if income is verified by LC
+acceptD	String	No	The date which the borrower accepted the offer
+expD	String	No	The date the listing will expire
+listD	String	No	The date which the borrower's application was listed on the platform.
+creditPullD	String	No	The date LC pulled credit for this loan
+reviewStatusD	String	Yes	The date the loan application was reviewed by LC
+reviewStatus	String	No	The status of the loan during the listing period. Values: APPROVED, NOT_APPROVED.
+desc	String	Yes	Loan description provided by the borrower
+purpose	String	No	A category provided by the borrower for the loan request. Values are: debt_consolidation, medical, home_improvement, renewable_energy, small_business, wedding, vacation, moving, house, car, major_purchase, credit_card, other
+addrZip	String	Yes	The first 3 numbers of the ZIP code provided by the borrower in the loan application.
+addrState	String	Yes	The address state provided by the borrower during loan application
+investorCount	Integer	Yes	The Number of investor members who have purchased notes from this loan
+ilsExpD	String	Yes	The date and time when the loan will no longer be in the initial listing status. After this date is past, the initialListStatus below will not have any effect and the loan will be treated as a FRACTIONAL loan.
+initialListStatus	String	No	The initial listing status of the loan. Possible values are W, F.
+empTitle	String	Yes	Employment title
+accNowDelinq	Integer	Yes	The Number of accounts on which the borrower is now delinquent.
+accOpenPast24Mths	Integer	Yes	Number of trades opened in past 24 months.
+bcOpenToBuy	Integer	Yes	Total open to buy on revolving bankcards.
+percentBcGt75	Number	Yes	Percentage of all bankcard accounts > 75% of limit.
+bcUtil	Number	Yes	Ratio of total current balance to high credit/credit limit for all bankcard accounts.
+dti	Number	Yes	The borrower's debt to income ratio, calculated using the monthly payments on the total debt obligations, excluding mortgage, divided by self-reported monthly income.
+delinq2Yrs	Integer	Yes	The Number of 30+ days past-due incidences of delinquency in the borrower's credit file for the past 2 years.
+delinqAmnt	Number	Yes	The past-due amount owed for the accounts on which the borrower is now delinquent.
+earliestCrLine	String	Yes	The date the borrower's earliest reported credit line was opened
+ficoRangeLow	Integer	Yes	The lower boundary of range the borrower's FICO belongs to.
+ficoRangeHigh	Integer	Yes	The upper boundary of range the borrower's FICO belongs to.
+inqLast6Mths	Integer	Yes	The Number of inquiries by creditors during the past 6 months.
+mthsSinceLastDelinq	Integer	Yes	The Number of months since the borrower's last delinquency.
+mthsSinceLastRecord	Integer	Yes	The Number of months since the last public record.
+mthsSinceRecentInq	Integer	Yes	Months since most recent inquiry.
+mthsSinceRecentRevolDelinq	Integer	Yes	Months since most recent revolving delinquency.
+mthsSinceRecentBc	Integer	Yes	Months since most recent bankcard account opened.
+mortAcc	Integer	Yes	Number of mortgage accounts.
+openAcc	Integer	Yes	The Number of open credit lines in the borrower's credit file.
+pubRec	Integer	Yes	Number of derogatory public records.
+totalBalExMort	Integer	Yes	Total credit balance excluding mortgage.
+revolBal	Number	Yes	Total credit revolving balance.
+revolUtil	Number	Yes	Revolving line utilization rate, or the amount of credit the borrower is using relative to all available revolving credit.
+totalBcLimit	Integer	Yes	Total bankcard high credit/credit limit.
+totalAcc	Integer	Yes	The total Number of credit lines currently in the borrower's credit file
+totalIlHighCreditLimit	Integer	Yes	Total installment high credit/credit limit
+numRevAccts	Integer	Yes	Number of revolving accounts
+mthsSinceRecentBcDlq	Integer	Yes	Months since most recent bankcard delinquency.
+pubRecBankruptcies	Integer	Yes	Number of public record bankruptcies.
+numAcctsEver120Ppd	Integer	Yes	Number of accounts ever 120 or more days past due.
+chargeoffWithin12Mths	Integer	Yes	Number of charge-offs within 12 months.
+collections12MthsExMed	Integer	Yes	Number of collections in 12 months excluding medical collections.
+taxLiens	Integer	Yes	Number of tax liens
+mthsSinceLastMajorDerog	Integer	Yes	Months since most recent 90-day or worse rating.
+numSats	Integer	Yes	Number of satisfactory accounts
+numTlOpPast12m	Integer	Yes	Number of accounts opened in past 12 months
+moSinRcntTl	Integer	Yes	Months since most recent account opened
+totHiCredLim	Integer	Yes	Total high credit/credit limit
+totCurBal	Integer	Yes	Total current balance of all accounts
+avgCurBal	Integer	Yes	Average current balance of all accounts
+numBcTl	Integer	Yes	Number of bankcard accounts
+numActvBcTl	Integer	Yes	Number of currently active bankcard accounts
+numBcSats	Integer	Yes	Number of satisfactory bankcard accounts
+pctTlNvrDlq	Integer	Yes	Percent of trades never delinquent
+numTl90gDpd24m	Integer	Yes	Number of accounts 90 or more days past due in last 24 months
+numTl30dpd	Integer	Yes	Number of accounts currently 30 days past due (updated in past 2 months)
+numTl120dpd2m	Integer	Yes	Number of accounts currently 120 days past due (updated in past 2 months)
+numIlTl	Integer	Yes	Number of installment accounts
+moSinOldIlAcct	Integer	Yes	Months since oldest installment account opened
+numActvRevTl	Integer	Yes	Number of currently active revolving trades
+moSinOldRevTlOp	Integer	Yes	Months since oldest revolving account opened
+moSinRcntRevTlOp	Integer	Yes	Months since most recent revolving account opened
+totalRevHiLim	Integer	Yes	Total revolving high credit/credit limit
+numRevTlBalGt0	Integer	Yes	Number of revolving trades with balance > 0
+numOpRevTl	Integer	Yes	Number of open revolving accounts
+totCollAmt	Integer	Yes	Total collection amounts ever owed
+fundedAmount	Number	No	The total amount funded by investors for that loan at that point in time.
+loanAmount	Number	No	The listed amount of the loan applied for by the borrower. If at some point in time, the credit department reduces the loan amount, then it will be reflected in this value.
+applicationType	String	Yes	The loan application type. Valid values are "INDIVIDUAL" or "JOINT".
+disbursementMethod	String	No	It will indicate the loan disbursement method. Valid values are "DIRECT_PAY" or "CASH".
+annualIncJoint	Number	Yes	The joint annual income if the applicationType is "JOINT".
+dtiJoint	Number	Yes	The joint debt to joint income ratio. This field is populated if the applicationType is "JOINT". Calculated using the monthly payments on the total debt obligations, excluding mortgage, divided by self-reported monthly income.
+isIncVJoint	String	Yes	Indicates if joint income is verified by LC. Valid values are NOT_VERIFIED,SOURCE_VERIFIED and VERIFIED.
+openAcc6m	Integer	Yes	Number of open trades in last 6 months.
+openIl6m	Integer	Yes	Number of currently active installment trades.
+openActIl	Integer	Yes	Number of currently active installment trades. This field is a replacement field for openIl6m
+openIl12m	Integer	Yes	Number of installment accounts opened in past 12 months.
+openIl24m	Integer	Yes	Number of installment accounts opened in past 24 months.
+mthsSinceRcntIl	Integer	Yes	Months since most recent installment accounts opened.
+totalBalIl	Number	Yes	Total current balance of all installment accounts.
+iLUtil	Number	Yes	Ratio of total current balance to high credit/credit limit on all install acct.
+openRv12m	Integer	Yes	Number of revolving trades opened in past 12 months.
+openRv24m	Integer	Yes	Number of revolving trades opened in past 24 months.
+maxBalBc	Number	Yes	Maximum current balance owed on all revolving accounts.
+allUtil	Number	Yes	Balance to credit limit on all trades.
+inqFi	Integer	Yes	Number of personal finance inquiries.
+totalCuTl	Integer	Yes	Number of credit union trades.
+inqLast12m	Integer	Yes	Number of credit inquiries in past 12 months.
+mtgPayment	Number	Yes	Monthly mortgage amount.
+housingPayment	Number	Yes	Borrower stated housing payment on loan application.
+revolBalJoint	Number	Yes	Sum of revolving credit balance of the co-borrowers, net of duplicate balances.
+secAppFicoRangeLow	Integer	Yes	FICO range (low) for the secondary applicant.
+secAppFicoRangeHigh	Integer	Yes	FICO range (high) for the secondary applicant.
+secAppEarliestCrLine	String	Yes	Earliest credit line at time of application for the secondary applicant.
+secAppInqLast6Mths	Integer	Yes	Credit inquiries in the last 6 months at time of application for the secondary applicant.
+secAppMortAcc	Integer	Yes	Number of mortgage accounts at time of application for the secondary applicant.
+secAppOpenAcc	Integer	Yes	Number of open trades at time of application for the secondary applicant.
+secAppRevolUtil	Number	Yes	Ratio of total current balance to high credit/credit limit for all revolving accounts.
+secAppOpenIl6m	Integer	Yes	Number of currently active installment trades at time of application for the secondary applicant.
+secAppOpenActIl	Integer	Yes	Number of currently active installment trades at time of application for the secondary applicant. This field is a replacement field for secAppOpenIl6m
+secAppNumRevAccts	Integer	Yes	Number of revolving accounts at time of application for the secondary applicant.
+secAppChargeoffWithin12Mths	Integer	Yes	Number of charge-offs within last 12 months at time of application for the secondary applicant.
+secAppCollections12MthsExMed	Integer	Yes	Number of collections within last 12 months excluding medical collections at time of application for the secondary applicant.
+secAppMthsSinceLastMajorDerog	Integer	Yes	Months since most recent 90-day or worse rating at time of application for the secondary applicant.

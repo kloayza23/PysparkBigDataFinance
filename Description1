@@ -1,0 +1,22 @@
+loan_amnt: The listed amount of the loan applied for by the borrower. If at some point in time, the credit department reduces the loan amount, then it will be reflected in this value.
+funded_amnt: The total amount funded by investors for that loan at that point in time.
+term: The Number of payments on the loan. Values are in months and can be either 36 or 60.
+grade: LC assigned loan grade
+sub_grade: LC assigned loan subgrade
+home_ownership: The home ownership status provided by the borrower during registration or obtained from the credit report. Our values are: RENT, OWN, MORTGAGE, OTHER
+verification_status: The status of the loan during the listing period. Values: APPROVED, NOT_APPROVED.
+purpose: A category provided by the borrower for the loan request. Values are: debt_consolidation, medical, home_improvement, renewable_energy, small_business, wedding, vacation, moving, house, car, major_purchase, credit_card, other
+emp_length: Employment length in months. Possible values are whole numbers from 0 and higher. 
+Null indicates not employed.
+int_rate: Interest Rate on the loan
+annual_inc: The annual income provided by the borrower during registration.
+dti: The borrower's debt to income ratio, calculated using the monthly payments on the total debt obligations, excluding mortgage, divided by self-reported monthly income.
+inq_last_6mths: information from the bureau last 6 months
+pub_rec: it indicates risk and hurts your ability to qualify for credit, obligations that were not paid
+revol_bal: sometimes a full payment doesn’t (or can’t) happen, The amount of credit you have versus the amount of credit you use is a factor in your credit score
+revol_util: the amount of credit the borrower is using relative to all available revolving credit.
+total_acc: The total Number of credit lines currently in the borrower's credit file
+total_pymnt: The total payment currently
+total_pymnt_inv: The total payment currently of investment
+total_rec_prncp:
+total_rec_int: interest of recollect total.
