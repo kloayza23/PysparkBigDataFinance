@@ -12,8 +12,11 @@ int_rate: Interest Rate on the loan
 annual_inc: The annual income provided by the borrower during registration.
 dti: The borrower's debt to income ratio, calculated using the monthly payments on the total debt obligations, excluding mortgage, divided by self-reported monthly income.
 inq_last_6mths: information from the bureau last 6 months
-pub_rec: it indicates risk and hurts your ability to qualify for credit, obligations that were not paid
-revol_bal: sometimes a full payment doesn’t (or can’t) happen, The amount of credit you have versus the amount of credit you use is a factor in your credit score
+pub_rec: it indicates risk and hurts your ability to qualify for credit, 
+obligations that were not paid
+revol_bal: sometimes a full payment doesn’t (or can’t) happen, 
+The amount of credit you have versus the amount of credit 
+you use is a factor in your credit score
 revol_util: the amount of credit the borrower is using relative to all available revolving credit.
 total_acc: The total Number of credit lines currently in the borrower's credit file
 total_pymnt: The total payment currently

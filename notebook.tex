@@ -1,0 +1,1578 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{FinalProject}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{final-project-of-big-data}{%
+\subsection{Final Project of Big Data}\label{final-project-of-big-data}}
+
+    \hypertarget{import-libraries}{%
+\subsection{Import Libraries}\label{import-libraries}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}108}]:} \PY{k+kn}{import} \PY{n+nn}{pyspark}
+          \PY{k+kn}{from} \PY{n+nn}{pyspark} \PY{k}{import} \PY{n}{SparkContext}
+          \PY{k+kn}{from} \PY{n+nn}{pyspark}\PY{n+nn}{.}\PY{n+nn}{sql} \PY{k}{import} \PY{n}{SQLContext}
+          \PY{c+c1}{\PYZsh{}sc = SparkContext(\PYZsq{}local\PYZsq{}, \PYZsq{}pyspark\PYZsq{}) }
+          \PY{n}{sqlContext} \PY{o}{=} \PY{n}{SQLContext}\PY{p}{(}\PY{n}{sc}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{load-data-set}{%
+\subsection{Load Data Set}\label{load-data-set}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}109}]:} \PY{n}{loadPath} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{../dataset/lending/loan.csv}\PY{l+s+s2}{\PYZdq{}}
+          \PY{n}{dataload} \PY{o}{=} \PY{n}{sqlContext}\PY{o}{.}\PY{n}{read}\PY{o}{.}\PY{n}{csv}\PY{p}{(}\PY{n}{loadPath}\PY{p}{,} \PY{n}{header}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{true}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{dataload}\PY{o}{.}\PY{n}{createOrReplaceTempView}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{loancredit}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{}dataload.cache()}
+\end{Verbatim}
+
+
+    \hypertarget{show-schema}{%
+\subsection{Show Schema}\label{show-schema}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{dataload}\PY{o}{.}\PY{n}{printSchema}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{dataload}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{clean-data}{%
+\section{Clean data}\label{clean-data}}
+
+    \hypertarget{check-for-duplications}{%
+\subsection{Check for duplications}\label{check-for-duplications}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Count of rows: }\PY{l+s+si}{\PYZob{}0\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{dataload}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Count of distinct rows: }\PY{l+s+si}{\PYZob{}0\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{dataload}\PY{o}{.}\PY{n}{distinct}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    The amount of rows is same, so not exist duplicate data
+
+    \hypertarget{missing-observations}{%
+\subsection{Missing observations}\label{missing-observations}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}110}]:} \PY{n}{datafilterloan} \PY{o}{=} \PY{n}{sqlContext}\PY{o}{.}\PY{n}{sql}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{select loan\PYZus{}status,loan\PYZus{}amnt,funded\PYZus{}amnt,term,grade,sub\PYZus{}grade,home\PYZus{}ownership,verification\PYZus{}status,purpose,title,emp\PYZus{}length,int\PYZus{}rate,annual\PYZus{}inc,dti,inq\PYZus{}last\PYZus{}6mths,open\PYZus{}acc,pub\PYZus{}rec,revol\PYZus{}bal,revol\PYZus{}util,total\PYZus{}acc,total\PYZus{}pymnt,total\PYZus{}pymnt\PYZus{}inv,total\PYZus{}rec\PYZus{}prncp,total\PYZus{}rec\PYZus{}int from loancredit}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{}datafilterloan\PYZus{}1=sqlContext.sql(\PYZdq{}select loan\PYZus{}status,loan\PYZus{}amnt as lo\PYZus{}mnt,funded\PYZus{}amnt as fun\PYZus{}mnt,term,grade,sub\PYZus{}grade as s\PYZus{}grad,home\PYZus{}ownership as hom\PYZus{}own,verification\PYZus{}status as verfi\PYZus{}sta,purpose from loancredit\PYZdq{})}
+          \PY{c+c1}{\PYZsh{}sqlContext.sql(\PYZdq{}select loan\PYZus{}status,loan\PYZus{}amnt as lo\PYZus{}mnt,funded\PYZus{}amnt as fun\PYZus{}mnt,term,grade,sub\PYZus{}grade as s\PYZus{}grad,home\PYZus{}ownership as hom\PYZus{}own,verification\PYZus{}status as verfi\PYZus{}sta,purpose from loancredit\PYZdq{}).show(5)}
+          \PY{c+c1}{\PYZsh{}datafilterloan\PYZus{}2=sqlContext.sql(\PYZdq{}select loan\PYZus{}status,title,emp\PYZus{}length,int\PYZus{}rate,annual\PYZus{}inc,dti,inq\PYZus{}last\PYZus{}6mths,open\PYZus{}acc,pub\PYZus{}rec,revol\PYZus{}bal from loancredit\PYZdq{})}
+          \PY{c+c1}{\PYZsh{}sqlContext.sql(\PYZdq{}select loan\PYZus{}status,title,emp\PYZus{}length,int\PYZus{}rate,annual\PYZus{}inc,dti,inq\PYZus{}last\PYZus{}6mths,open\PYZus{}acc,pub\PYZus{}rec,revol\PYZus{}bal from loancredit\PYZdq{}).show(5)}
+          \PY{c+c1}{\PYZsh{}datafilterloan\PYZus{}3=sqlContext.sql(\PYZdq{}select loan\PYZus{}status,revol\PYZus{}util,total\PYZus{}acc,total\PYZus{}pymnt,total\PYZus{}pymnt\PYZus{}inv,total\PYZus{}rec\PYZus{}prncp as TotRecPy,total\PYZus{}rec\PYZus{}int as TotRecInt,last\PYZus{}pymnt\PYZus{}amnt,last\PYZus{}pymnt\PYZus{}d from loancredit\PYZdq{})}
+          \PY{c+c1}{\PYZsh{}sqlContext.sql(\PYZdq{}select loan\PYZus{}status,revol\PYZus{}util,total\PYZus{}acc,total\PYZus{}pymnt,total\PYZus{}pymnt\PYZus{}inv,total\PYZus{}rec\PYZus{}prncp as TotRecPy,total\PYZus{}rec\PYZus{}int as TotRecInt,last\PYZus{}pymnt\PYZus{}amnt,last\PYZus{}pymnt\PYZus{}d from loancredit\PYZdq{}).show(5)}
+          \PY{n}{datafilterloan}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
++-----------+---------+-----------+----------+-----+---------+--------------+-------------------+--------------+--------------------+----------+--------+----------+-----+--------------+--------+-------+---------+----------+---------+-------------+---------------+---------------+-------------+
+|loan\_status|loan\_amnt|funded\_amnt|      term|grade|sub\_grade|home\_ownership|verification\_status|       purpose|               title|emp\_length|int\_rate|annual\_inc|  dti|inq\_last\_6mths|open\_acc|pub\_rec|revol\_bal|revol\_util|total\_acc|  total\_pymnt|total\_pymnt\_inv|total\_rec\_prncp|total\_rec\_int|
++-----------+---------+-----------+----------+-----+---------+--------------+-------------------+--------------+--------------------+----------+--------+----------+-----+--------------+--------+-------+---------+----------+---------+-------------+---------------+---------------+-------------+
+| Fully Paid|   5000.0|     5000.0| 36 months|    B|       B2|          RENT|           Verified|   credit\_card|            Computer| 10+ years|   10.65|   24000.0|27.65|           1.0|     3.0|    0.0|  13648.0|      83.7|      9.0|5861.07141425|        5831.78|         5000.0|       861.07|
+|Charged Off|   2500.0|     2500.0| 60 months|    C|       C4|          RENT|    Source Verified|           car|                bike|  < 1 year|   15.27|   30000.0|  1.0|           5.0|     3.0|    0.0|   1687.0|       9.4|      4.0|      1008.71|        1008.71|         456.46|       435.17|
+| Fully Paid|   2400.0|     2400.0| 36 months|    C|       C5|          RENT|       Not Verified|small\_business|real estate business| 10+ years|   15.96|   12252.0| 8.72|           2.0|     2.0|    0.0|   2956.0|      98.5|     10.0|3003.65364445|        3003.65|         2400.0|       603.65|
+| Fully Paid|  10000.0|    10000.0| 36 months|    C|       C1|          RENT|    Source Verified|         other|            personel| 10+ years|   13.49|   49200.0| 20.0|           1.0|    10.0|    0.0|   5598.0|      21.0|     37.0|12226.3022123|        12226.3|        10000.0|      2209.33|
+|    Current|   3000.0|     3000.0| 60 months|    B|       B5|          RENT|    Source Verified|         other|            Personal|    1 year|   12.69|   80000.0|17.94|           0.0|    15.0|    0.0|  27783.0|      53.9|     38.0|      3242.17|        3242.17|         2233.1|      1009.07|
++-----------+---------+-----------+----------+-----+---------+--------------+-------------------+--------------+--------------------+----------+--------+----------+-----+--------------+--------+-------+---------+----------+---------+-------------+---------------+---------------+-------------+
+only showing top 5 rows
+
+
+    \end{Verbatim}
+
+    \hypertarget{discretization-convert-the-categorical-variable-in-numeric-variable.}{%
+\subsubsection{Discretization: Convert the categorical variable in
+numeric
+variable.}\label{discretization-convert-the-categorical-variable-in-numeric-variable.}}
+
+\hypertarget{conversion-of-the-following-variable}{%
+\subsubsection{Conversion of the following
+variable:}\label{conversion-of-the-following-variable}}
+
+\begin{itemize}
+\tightlist
+\item
+  loan\_status
+\item
+  term
+\item
+  grade
+\item
+  sub\_grade
+\item
+  home\_ownership
+\item
+  verification\_status
+\item
+  purpose
+\item
+  emp\_length
+\end{itemize}
+
+    \hypertarget{encoding-function-of-the-following-variable-loan-status-term-grade-sub_grade-home_ownership-verification_status-purpose-title}{%
+\subsubsection{Encoding function of the following variable (Loan Status,
+term, grade, sub\_grade, home\_ownership, verification\_status, purpose,
+title)}\label{encoding-function-of-the-following-variable-loan-status-term-grade-sub_grade-home_ownership-verification_status-purpose-title}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}111}]:} \PY{k}{def} \PY{n+nf}{loan\PYZus{}status\PYZus{}transformer}\PY{p}{(}\PY{n}{cat}\PY{p}{)}\PY{p}{:}
+              \PY{k}{if}\PY{p}{(}\PY{n}{cat} \PY{o+ow}{is} \PY{k+kc}{None}\PY{p}{)}\PY{p}{:}
+                  \PY{k}{return} \PY{l+m+mi}{0}
+              \PY{k}{else}\PY{p}{:}
+                  \PY{k}{if}\PY{p}{(}\PY{n}{cat} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fully Paid}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:} 
+                      \PY{k}{return} \PY{l+m+mi}{1}
+                  \PY{k}{elif}\PY{p}{(}\PY{n}{cat} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Charged Off}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:} 
+                      \PY{k}{return} \PY{l+m+mi}{2}
+                  \PY{k}{elif}\PY{p}{(}\PY{n}{cat} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Current}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:} 
+                      \PY{k}{return} \PY{l+m+mi}{3}
+                  \PY{k}{elif}\PY{p}{(}\PY{n}{cat} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Default}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:} 
+                      \PY{k}{return} \PY{l+m+mi}{4}
+                  \PY{k}{elif}\PY{p}{(}\PY{n}{cat} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{In Grace Period}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:} 
+                      \PY{k}{return} \PY{l+m+mi}{5}
+                  \PY{k}{elif}\PY{p}{(}\PY{n}{cat} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Late (31\PYZhy{}120 days)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:} 
+                      \PY{k}{return} \PY{l+m+mi}{6}
+                  \PY{k}{else}\PY{p}{:}
+                      \PY{k}{return} \PY{l+m+mi}{0}
+          \PY{k}{def} \PY{n+nf}{term\PYZus{}transformer}\PY{p}{(}\PY{n}{cat}\PY{p}{)}\PY{p}{:}
+              \PY{k}{if}\PY{p}{(}\PY{n}{cat} \PY{o+ow}{is} \PY{k+kc}{None}\PY{p}{)}\PY{p}{:}
+                  \PY{k}{return} \PY{l+m+mi}{0}
+              \PY{k}{else}\PY{p}{:}
+                  \PY{k}{if}\PY{p}{(}\PY{n}{cat}\PY{o}{.}\PY{n}{strip}\PY{p}{(}\PY{p}{)} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{60 months}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:} 
+                      \PY{k}{return} \PY{l+m+mi}{2}
+                  \PY{k}{elif}\PY{p}{(}\PY{n}{cat}\PY{o}{.}\PY{n}{strip}\PY{p}{(}\PY{p}{)} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{36 months}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:} 
+                      \PY{k}{return} \PY{l+m+mi}{1}
+                  \PY{k}{else}\PY{p}{:}
+                      \PY{k}{return} \PY{l+m+mi}{0}
+          \PY{k}{def} \PY{n+nf}{grade\PYZus{}transformer}\PY{p}{(}\PY{n}{cat}\PY{p}{)}\PY{p}{:}
+              \PY{k}{if}\PY{p}{(}\PY{n}{cat} \PY{o+ow}{is} \PY{k+kc}{None}\PY{p}{)}\PY{p}{:}
+                  \PY{k}{return} \PY{l+m+mi}{0}
+              \PY{k}{else}\PY{p}{:}
+                  \PY{n}{alfa} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ABCDEFG}\PY{l+s+s2}{\PYZdq{}}
+                  \PY{k}{for} \PY{n}{ind}\PY{p}{,}\PY{n}{x} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{alfa}\PY{p}{)}\PY{p}{:}
+                      \PY{k}{if}\PY{p}{(}\PY{n}{x}\PY{o}{==}\PY{n}{cat}\PY{p}{)}\PY{p}{:}
+                          \PY{k}{return} \PY{n}{ind}\PY{o}{+}\PY{l+m+mi}{1}  
+                  \PY{k}{return} \PY{l+m+mi}{0}
+          \PY{k}{def} \PY{n+nf}{subgrade\PYZus{}transformer}\PY{p}{(}\PY{n}{cat}\PY{p}{)}\PY{p}{:}
+              \PY{k}{if}\PY{p}{(}\PY{n}{cat} \PY{o+ow}{is} \PY{k+kc}{None}\PY{p}{)}\PY{p}{:}
+                  \PY{k}{return} \PY{l+m+mi}{0}
+              \PY{k}{else}\PY{p}{:}
+                  \PY{n}{alfa} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ABCDEFG}\PY{l+s+s2}{\PYZdq{}}
+                  \PY{n}{numer} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{12345}\PY{l+s+s2}{\PYZdq{}}
+                  \PY{n}{count}\PY{o}{=}\PY{l+m+mi}{1}
+                  \PY{k}{for} \PY{n}{indx}\PY{p}{,}\PY{n}{x} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{alfa}\PY{p}{)}\PY{p}{:}
+                      \PY{k}{for} \PY{n}{indy}\PY{p}{,}\PY{n}{y} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{numer}\PY{p}{)}\PY{p}{:}
+                          \PY{k}{if}\PY{p}{(}\PY{n}{x}\PY{o}{+}\PY{n}{y} \PY{o}{==} \PY{n}{cat}\PY{o}{.}\PY{n}{strip}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                              \PY{k}{return} \PY{n}{count}
+                          \PY{n}{count}\PY{o}{+}\PY{o}{=}\PY{l+m+mi}{1}
+                  \PY{k}{return} \PY{n}{count}
+          \PY{k}{def} \PY{n+nf}{emplen\PYZus{}transformer}\PY{p}{(}\PY{n}{cat}\PY{p}{)}\PY{p}{:}
+              \PY{n}{output}\PY{o}{=}\PY{l+m+mi}{0}
+              \PY{k}{if}\PY{p}{(}\PY{n}{cat} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{n/a}\PY{l+s+s2}{\PYZdq{}} \PY{o+ow}{or} \PY{n}{cat} \PY{o+ow}{is} \PY{k+kc}{None}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{output}\PY{o}{=}\PY{l+m+mi}{0}
+              \PY{k}{if}\PY{p}{(}\PY{n}{cat} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZlt{} 1 year}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{output}\PY{o}{=}\PY{l+m+mi}{1}
+              \PY{k}{for} \PY{n}{item} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{:}
+                  \PY{k}{if}\PY{p}{(}\PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{item}\PY{p}{)}\PY{o}{+}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ years}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)} \PY{o}{==} \PY{n}{cat}\PY{o}{.}\PY{n}{strip}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                      \PY{n}{output}\PY{o}{=}\PY{n}{item}
+              \PY{k}{if}\PY{p}{(}\PY{n}{cat} \PY{o}{==}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{10+ years}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{output}\PY{o}{=}\PY{l+m+mi}{10}
+              \PY{k}{return} \PY{n}{output}
+          \PY{k}{def} \PY{n+nf}{hoow\PYZus{}transformer}\PY{p}{(}\PY{n}{cat}\PY{p}{)}\PY{p}{:}
+              \PY{k}{if}\PY{p}{(}\PY{n}{cat} \PY{o+ow}{is} \PY{k+kc}{None}\PY{p}{)}\PY{p}{:}
+                      \PY{k}{return} \PY{l+m+mi}{0}
+              \PY{k}{else}\PY{p}{:}
+                  \PY{k}{if}\PY{p}{(}\PY{n}{cat}\PY{o}{.}\PY{n}{strip}\PY{p}{(}\PY{p}{)} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MORTAGE}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:} 
+                      \PY{k}{return} \PY{l+m+mi}{1}
+                  \PY{k}{elif}\PY{p}{(}\PY{n}{cat}\PY{o}{.}\PY{n}{strip}\PY{p}{(}\PY{p}{)} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{OWN}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:} 
+                      \PY{k}{return} \PY{l+m+mi}{2}
+                  \PY{k}{elif}\PY{p}{(}\PY{n}{cat}\PY{o}{.}\PY{n}{strip}\PY{p}{(}\PY{p}{)} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{RENT}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:} 
+                      \PY{k}{return} \PY{l+m+mi}{3}
+                  \PY{k}{else}\PY{p}{:}
+                      \PY{k}{return} \PY{l+m+mi}{0}
+          \PY{k}{def} \PY{n+nf}{verst\PYZus{}transformer}\PY{p}{(}\PY{n}{cat}\PY{p}{)}\PY{p}{:}
+              \PY{k}{if}\PY{p}{(}\PY{n}{cat} \PY{o+ow}{is} \PY{k+kc}{None}\PY{p}{)}\PY{p}{:}
+                  \PY{k}{return} \PY{l+m+mi}{0}
+              \PY{k}{else}\PY{p}{:}
+                  \PY{k}{if}\PY{p}{(}\PY{n}{cat}\PY{o}{.}\PY{n}{strip}\PY{p}{(}\PY{p}{)} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Not Verified}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:} 
+                      \PY{k}{return} \PY{l+m+mi}{1}
+                  \PY{k}{elif}\PY{p}{(}\PY{n}{cat}\PY{o}{.}\PY{n}{strip}\PY{p}{(}\PY{p}{)} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Verified}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:} 
+                      \PY{k}{return} \PY{l+m+mi}{2}
+                  \PY{k}{elif}\PY{p}{(}\PY{n}{cat}\PY{o}{.}\PY{n}{strip}\PY{p}{(}\PY{p}{)} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Source Verified}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:} 
+                      \PY{k}{return} \PY{l+m+mi}{3}
+                  \PY{k}{else}\PY{p}{:}
+                      \PY{k}{return} \PY{l+m+mi}{0}
+          \PY{k}{def} \PY{n+nf}{purp\PYZus{}transformer}\PY{p}{(}\PY{n}{cat}\PY{p}{)}\PY{p}{:}
+              \PY{k}{if}\PY{p}{(}\PY{n}{cat} \PY{o+ow}{is} \PY{k+kc}{None}\PY{p}{)}\PY{p}{:}
+                  \PY{k}{return} \PY{l+m+mi}{0}
+              \PY{k}{else}\PY{p}{:}
+                  \PY{k}{if}\PY{p}{(}\PY{n}{cat}\PY{o}{.}\PY{n}{strip}\PY{p}{(}\PY{p}{)} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{car}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:} 
+                      \PY{k}{return} \PY{l+m+mi}{13}
+                  \PY{k}{elif}\PY{p}{(}\PY{n}{cat}\PY{o}{.}\PY{n}{strip}\PY{p}{(}\PY{p}{)} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{credit\PYZus{}card}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:} 
+                      \PY{k}{return} \PY{l+m+mi}{1}
+                  \PY{k}{elif}\PY{p}{(}\PY{n}{cat}\PY{o}{.}\PY{n}{strip}\PY{p}{(}\PY{p}{)} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{debt\PYZus{}consolidation}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:} 
+                      \PY{k}{return} \PY{l+m+mi}{2}
+                  \PY{k}{elif}\PY{p}{(}\PY{n}{cat}\PY{o}{.}\PY{n}{strip}\PY{p}{(}\PY{p}{)} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{home\PYZus{}improvement}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:} 
+                      \PY{k}{return} \PY{l+m+mi}{3}
+                  \PY{k}{elif}\PY{p}{(}\PY{n}{cat}\PY{o}{.}\PY{n}{strip}\PY{p}{(}\PY{p}{)} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{house}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:} 
+                      \PY{k}{return} \PY{l+m+mi}{4}
+                  \PY{k}{elif}\PY{p}{(}\PY{n}{cat}\PY{o}{.}\PY{n}{strip}\PY{p}{(}\PY{p}{)} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{major\PYZus{}purchase}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:} 
+                      \PY{k}{return} \PY{l+m+mi}{5}
+                  \PY{k}{elif}\PY{p}{(}\PY{n}{cat}\PY{o}{.}\PY{n}{strip}\PY{p}{(}\PY{p}{)} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{medical}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:} 
+                      \PY{k}{return} \PY{l+m+mi}{6}
+                  \PY{k}{elif}\PY{p}{(}\PY{n}{cat}\PY{o}{.}\PY{n}{strip}\PY{p}{(}\PY{p}{)} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{moving}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:} 
+                      \PY{k}{return} \PY{l+m+mi}{7}
+                  \PY{k}{elif}\PY{p}{(}\PY{n}{cat}\PY{o}{.}\PY{n}{strip}\PY{p}{(}\PY{p}{)} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{other}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:} 
+                      \PY{k}{return} \PY{l+m+mi}{8}
+                  \PY{k}{elif}\PY{p}{(}\PY{n}{cat}\PY{o}{.}\PY{n}{strip}\PY{p}{(}\PY{p}{)} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{renewable\PYZus{}energi}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:} 
+                      \PY{k}{return} \PY{l+m+mi}{9}
+                  \PY{k}{elif}\PY{p}{(}\PY{n}{cat}\PY{o}{.}\PY{n}{strip}\PY{p}{(}\PY{p}{)} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{small\PYZus{}business}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:} 
+                      \PY{k}{return} \PY{l+m+mi}{10}
+                  \PY{k}{elif}\PY{p}{(}\PY{n}{cat}\PY{o}{.}\PY{n}{strip}\PY{p}{(}\PY{p}{)} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{vacation}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:} 
+                      \PY{k}{return} \PY{l+m+mi}{11}
+                  \PY{k}{elif}\PY{p}{(}\PY{n}{cat}\PY{o}{.}\PY{n}{strip}\PY{p}{(}\PY{p}{)} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{wedding}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:} 
+                      \PY{k}{return} \PY{l+m+mi}{12}
+                  \PY{k}{else}\PY{p}{:}
+                      \PY{k}{return} \PY{l+m+mi}{0}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{emplen\PYZus{}transformer}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{10+ years}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+10
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}112}]:} \PY{k+kn}{import} \PY{n+nn}{pyspark}\PY{n+nn}{.}\PY{n+nn}{ml}\PY{n+nn}{.}\PY{n+nn}{feature} \PY{k}{as} \PY{n+nn}{ft}
+          \PY{k+kn}{import} \PY{n+nn}{pyspark}\PY{n+nn}{.}\PY{n+nn}{sql}\PY{n+nn}{.}\PY{n+nn}{types} \PY{k}{as} \PY{n+nn}{typ}
+          \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+          \PY{k+kn}{from} \PY{n+nn}{pyspark}\PY{n+nn}{.}\PY{n+nn}{sql}\PY{n+nn}{.}\PY{n+nn}{functions} \PY{k}{import} \PY{n}{udf}
+          \PY{k+kn}{from} \PY{n+nn}{pyspark}\PY{n+nn}{.}\PY{n+nn}{sql}\PY{n+nn}{.}\PY{n+nn}{types} \PY{k}{import} \PY{o}{*}
+\end{Verbatim}
+
+
+    \hypertarget{convert-from-categorical-to-numerical-features-through-udf}{%
+\subsubsection{Convert from categorical to numerical features through
+UDF}\label{convert-from-categorical-to-numerical-features-through-udf}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}113}]:} \PY{c+c1}{\PYZsh{} loan\PYZus{}status}
+          \PY{n}{udfloan\PYZus{}status\PYZus{}transformer} \PY{o}{=} \PY{n}{udf}\PY{p}{(}\PY{n}{loan\PYZus{}status\PYZus{}transformer}\PY{p}{,} \PY{n}{IntegerType}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+          \PY{n}{datafilterloan} \PY{o}{=} \PY{n}{datafilterloan}\PY{o}{.}\PY{n}{withColumn}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{loan\PYZus{}status\PYZus{}int}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{udfloan\PYZus{}status\PYZus{}transformer}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{loan\PYZus{}status}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{} term}
+          \PY{n}{udfterm\PYZus{}transformer} \PY{o}{=} \PY{n}{udf}\PY{p}{(}\PY{n}{term\PYZus{}transformer}\PY{p}{,} \PY{n}{IntegerType}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+          \PY{n}{datafilterloan} \PY{o}{=} \PY{n}{datafilterloan}\PY{o}{.}\PY{n}{withColumn}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{term\PYZus{}int}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{udfterm\PYZus{}transformer}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{term}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{} grade}
+          \PY{n}{udfgrade\PYZus{}transformer} \PY{o}{=} \PY{n}{udf}\PY{p}{(}\PY{n}{grade\PYZus{}transformer}\PY{p}{,} \PY{n}{IntegerType}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+          \PY{n}{datafilterloan} \PY{o}{=} \PY{n}{datafilterloan}\PY{o}{.}\PY{n}{withColumn}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{grade\PYZus{}int}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{udfgrade\PYZus{}transformer}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{grade}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{} sub\PYZus{}grade}
+          \PY{n}{udfsubgrade\PYZus{}transformer} \PY{o}{=} \PY{n}{udf}\PY{p}{(}\PY{n}{subgrade\PYZus{}transformer}\PY{p}{,} \PY{n}{IntegerType}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+          \PY{n}{datafilterloan} \PY{o}{=} \PY{n}{datafilterloan}\PY{o}{.}\PY{n}{withColumn}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{su\PYZus{}grad\PYZus{}int}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{udfsubgrade\PYZus{}transformer}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{sub\PYZus{}grade}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{} home\PYZus{}ownership}
+          \PY{n}{udfhoow\PYZus{}transformer} \PY{o}{=} \PY{n}{udf}\PY{p}{(}\PY{n}{hoow\PYZus{}transformer}\PY{p}{,} \PY{n}{IntegerType}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+          \PY{n}{datafilterloan} \PY{o}{=} \PY{n}{datafilterloan}\PY{o}{.}\PY{n}{withColumn}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{homeowner\PYZus{}int}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{udfhoow\PYZus{}transformer}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{home\PYZus{}ownership}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{} verification\PYZus{}status}
+          \PY{n}{udfverst\PYZus{}transformer} \PY{o}{=} \PY{n}{udf}\PY{p}{(}\PY{n}{verst\PYZus{}transformer}\PY{p}{,} \PY{n}{IntegerType}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+          \PY{n}{datafilterloan} \PY{o}{=} \PY{n}{datafilterloan}\PY{o}{.}\PY{n}{withColumn}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{veri\PYZus{}sta\PYZus{}int}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{udfverst\PYZus{}transformer}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{verification\PYZus{}status}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{} purpose}
+          \PY{n}{udfpurp\PYZus{}transformer} \PY{o}{=} \PY{n}{udf}\PY{p}{(}\PY{n}{purp\PYZus{}transformer}\PY{p}{,} \PY{n}{IntegerType}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+          \PY{n}{datafilterloan} \PY{o}{=} \PY{n}{datafilterloan}\PY{o}{.}\PY{n}{withColumn}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{purpose\PYZus{}int}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{udfpurp\PYZus{}transformer}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{purpose}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{} purpose}
+          \PY{n}{udfemplen\PYZus{}transformer} \PY{o}{=} \PY{n}{udf}\PY{p}{(}\PY{n}{emplen\PYZus{}transformer}\PY{p}{,} \PY{n}{IntegerType}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+          \PY{n}{datafilterloan} \PY{o}{=} \PY{n}{datafilterloan}\PY{o}{.}\PY{n}{withColumn}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{emp\PYZus{}length\PYZus{}int}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{udfemplen\PYZus{}transformer}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{emp\PYZus{}length}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{test-of-discretizaties-values}{%
+\subsubsection{Test of Discretizaties
+values}\label{test-of-discretizaties-values}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}114}]:} \PY{n}{datafilterloan}\PY{o}{.}\PY{n}{select}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{loan\PYZus{}status\PYZus{}int}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{term\PYZus{}int}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{grade\PYZus{}int}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{su\PYZus{}grad\PYZus{}int}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{homeowner\PYZus{}int}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{veri\PYZus{}sta\PYZus{}int}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{purpose\PYZus{}int}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{emp\PYZus{}length\PYZus{}int}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
++---------------+--------+---------+-----------+-------------+------------+-----------+--------------+
+|loan\_status\_int|term\_int|grade\_int|su\_grad\_int|homeowner\_int|veri\_sta\_int|purpose\_int|emp\_length\_int|
++---------------+--------+---------+-----------+-------------+------------+-----------+--------------+
+|              1|       1|        2|          7|            3|           2|          1|            10|
+|              2|       2|        3|         14|            3|           3|         13|             1|
+|              1|       1|        3|         15|            3|           1|         10|            10|
+|              1|       1|        3|         11|            3|           3|          8|            10|
+|              3|       2|        2|         10|            3|           3|          8|             0|
+|              1|       1|        1|          4|            3|           3|         12|             3|
+|              3|       2|        3|         15|            3|           1|          2|             8|
+|              1|       1|        5|         21|            3|           3|         13|             9|
+|              2|       2|        6|         27|            2|           3|         10|             4|
+|              2|       2|        2|         10|            3|           2|          8|             1|
++---------------+--------+---------+-----------+-------------+------------+-----------+--------------+
+only showing top 10 rows
+
+
+    \end{Verbatim}
+
+    \hypertarget{stratification-put-values-in-range.}{%
+\subsection{Stratification: Put values in
+range.}\label{stratification-put-values-in-range.}}
+
+\#\#\# Strat the following variable:
+
+\begin{itemize}
+\tightlist
+\item
+  loan\_amnt
+\item
+  funded\_amnt
+\item
+  annual\_inc
+\item
+  revol\_bal
+\end{itemize}
+
+    \hypertarget{stratification-function-of-the-following-variable-loan_amnt-funded_amnt-annual_inc-revol_bal}{%
+\subsubsection{Stratification function of the following variable
+(loan\_amnt, funded\_amnt, annual\_inc,
+revol\_bal)}\label{stratification-function-of-the-following-variable-loan_amnt-funded_amnt-annual_inc-revol_bal}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}115}]:} \PY{k+kn}{import} \PY{n+nn}{numbers}
+          \PY{k}{def} \PY{n+nf}{loan\PYZus{}amnt\PYZus{}strat}\PY{p}{(}\PY{n}{recei}\PY{p}{)}\PY{p}{:}    
+              \PY{k}{try}\PY{p}{:}
+                  \PY{k}{if}\PY{p}{(}\PY{n}{recei} \PY{o+ow}{is} \PY{k+kc}{None}\PY{p}{)}\PY{p}{:}
+                      \PY{k}{return} \PY{l+m+mi}{0}
+                  \PY{k}{else}\PY{p}{:}
+                      \PY{n}{val\PYZus{}str}\PY{o}{=}\PY{n+nb}{float}\PY{p}{(}\PY{n}{recei}\PY{p}{)}
+                      \PY{n}{val\PYZus{}comp}\PY{o}{=}\PY{l+m+mf}{0.00}
+                      \PY{k}{for} \PY{n}{itera} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{7}\PY{p}{)}\PY{p}{:}
+                          \PY{k}{if}\PY{p}{(}\PY{n}{val\PYZus{}str} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n}{val\PYZus{}comp} \PY{o+ow}{and} \PY{n}{val\PYZus{}str} \PY{o}{\PYZlt{}} \PY{p}{(}\PY{n}{val\PYZus{}comp}\PY{o}{+}\PY{l+m+mf}{5001.00}\PY{p}{)}\PY{p}{)}\PY{p}{:} 
+                              \PY{k}{return} \PY{n}{itera}\PY{o}{+}\PY{l+m+mi}{1}
+                          \PY{n}{val\PYZus{}comp}\PY{o}{+}\PY{o}{=}\PY{l+m+mf}{5000.00}
+                      \PY{k}{return} \PY{l+m+mi}{0}
+              \PY{k}{except} \PY{n+ne}{ValueError}\PY{p}{:} 
+                  \PY{k}{return} \PY{l+m+mi}{0}
+          \PY{k}{def} \PY{n+nf}{funded\PYZus{}amnt\PYZus{}strat}\PY{p}{(}\PY{n}{recei}\PY{p}{)}\PY{p}{:}
+              \PY{k}{try}\PY{p}{:}
+                  \PY{k}{if}\PY{p}{(}\PY{n}{recei} \PY{o+ow}{is} \PY{k+kc}{None}\PY{p}{)}\PY{p}{:}
+                      \PY{k}{return} \PY{l+m+mi}{0}
+                  \PY{k}{else}\PY{p}{:}
+                      \PY{n}{val\PYZus{}str}\PY{o}{=}\PY{n+nb}{float}\PY{p}{(}\PY{n}{recei}\PY{p}{)}
+                      \PY{n}{val\PYZus{}comp}\PY{o}{=}\PY{l+m+mf}{0.00}
+                      \PY{k}{for} \PY{n}{itera} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{7}\PY{p}{)}\PY{p}{:}
+                          \PY{k}{if}\PY{p}{(}\PY{n}{val\PYZus{}str} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n}{val\PYZus{}comp} \PY{o+ow}{and} \PY{n}{val\PYZus{}str} \PY{o}{\PYZlt{}} \PY{p}{(}\PY{n}{val\PYZus{}comp}\PY{o}{+}\PY{l+m+mf}{5001.00}\PY{p}{)}\PY{p}{)}\PY{p}{:} 
+                              \PY{k}{return} \PY{n}{itera}\PY{o}{+}\PY{l+m+mi}{1}
+                          \PY{n}{val\PYZus{}comp}\PY{o}{+}\PY{o}{=}\PY{l+m+mf}{5000.00}
+                      \PY{k}{return} \PY{l+m+mi}{0}
+              \PY{k}{except} \PY{n+ne}{ValueError}\PY{p}{:} 
+                  \PY{k}{return} \PY{l+m+mi}{0}
+          \PY{k}{def} \PY{n+nf}{annual\PYZus{}inc\PYZus{}strat}\PY{p}{(}\PY{n}{recei}\PY{p}{)}\PY{p}{:}
+              \PY{k}{try}\PY{p}{:}
+                  \PY{k}{if}\PY{p}{(}\PY{n}{recei} \PY{o+ow}{is} \PY{k+kc}{None}\PY{p}{)}\PY{p}{:}
+                      \PY{k}{return} \PY{l+m+mi}{0}
+                  \PY{k}{else}\PY{p}{:}
+                      \PY{n}{val\PYZus{}str}\PY{o}{=}\PY{n+nb}{float}\PY{p}{(}\PY{n}{recei}\PY{p}{)}
+                      \PY{n}{val\PYZus{}comp}\PY{o}{=}\PY{l+m+mf}{0.00}
+                      \PY{k}{for} \PY{n}{itera} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{105}\PY{p}{)}\PY{p}{:}
+                          \PY{k}{if}\PY{p}{(}\PY{n}{val\PYZus{}str} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n}{val\PYZus{}comp} \PY{o+ow}{and} \PY{n}{val\PYZus{}str} \PY{o}{\PYZlt{}} \PY{p}{(}\PY{n}{val\PYZus{}comp}\PY{o}{+}\PY{l+m+mf}{5001.00}\PY{p}{)}\PY{p}{)}\PY{p}{:} 
+                              \PY{k}{return} \PY{n}{itera}\PY{o}{+}\PY{l+m+mi}{1}
+                          \PY{n}{val\PYZus{}comp}\PY{o}{+}\PY{o}{=}\PY{l+m+mf}{5000.00}
+                      \PY{k}{return} \PY{l+m+mi}{0}
+              \PY{k}{except} \PY{n+ne}{ValueError}\PY{p}{:} 
+                  \PY{k}{return} \PY{l+m+mi}{0}
+          \PY{k}{def} \PY{n+nf}{revol\PYZus{}bal\PYZus{}strat}\PY{p}{(}\PY{n}{receiy}\PY{p}{)}\PY{p}{:}
+              \PY{k}{try}\PY{p}{:}
+                  \PY{k}{if}\PY{p}{(}\PY{n}{receiy} \PY{o+ow}{is} \PY{k+kc}{None}\PY{p}{)}\PY{p}{:}
+                      \PY{k}{return} \PY{l+m+mi}{0}
+                  \PY{k}{else}\PY{p}{:}
+                      \PY{n}{val\PYZus{}str}\PY{o}{=}\PY{n+nb}{float}\PY{p}{(}\PY{n}{receiy}\PY{p}{)}
+                      \PY{n}{val\PYZus{}comp}\PY{o}{=}\PY{l+m+mf}{0.00}
+                      \PY{k}{for} \PY{n}{itera} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{66}\PY{p}{)}\PY{p}{:}
+                          \PY{k}{if}\PY{p}{(}\PY{n}{val\PYZus{}str} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n}{val\PYZus{}comp} \PY{o+ow}{and} \PY{n}{val\PYZus{}str} \PY{o}{\PYZlt{}} \PY{p}{(}\PY{n}{val\PYZus{}comp}\PY{o}{+}\PY{l+m+mf}{2001.00}\PY{p}{)}\PY{p}{)}\PY{p}{:} 
+                              \PY{k}{return} \PY{n}{itera}\PY{o}{+}\PY{l+m+mi}{1}
+                          \PY{n}{val\PYZus{}comp}\PY{o}{+}\PY{o}{=}\PY{l+m+mf}{2000.00}
+                      \PY{k}{return} \PY{l+m+mi}{0}
+              \PY{k}{except} \PY{n+ne}{ValueError}\PY{p}{:} 
+                  \PY{k}{return} \PY{l+m+mi}{0}
+          \PY{k}{def} \PY{n+nf}{revol\PYZus{}util\PYZus{}strat}\PY{p}{(}\PY{n}{receiy}\PY{p}{)}\PY{p}{:}
+              \PY{k}{try}\PY{p}{:}
+                  \PY{k}{if}\PY{p}{(}\PY{n}{receiy} \PY{o+ow}{is} \PY{k+kc}{None}\PY{p}{)}\PY{p}{:}
+                      \PY{k}{return} \PY{l+m+mi}{0}
+                  \PY{k}{else}\PY{p}{:}
+                      \PY{n}{val\PYZus{}str}\PY{o}{=}\PY{n+nb}{float}\PY{p}{(}\PY{n}{receiy}\PY{p}{)}
+                      \PY{n}{val\PYZus{}comp}\PY{o}{=}\PY{l+m+mf}{0.00}
+                      \PY{k}{for} \PY{n}{itera} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{66}\PY{p}{)}\PY{p}{:}
+                          \PY{k}{if}\PY{p}{(}\PY{n}{val\PYZus{}str} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n}{val\PYZus{}comp} \PY{o+ow}{and} \PY{n}{val\PYZus{}str} \PY{o}{\PYZlt{}} \PY{p}{(}\PY{n}{val\PYZus{}comp}\PY{o}{+}\PY{l+m+mf}{1001.00}\PY{p}{)}\PY{p}{)}\PY{p}{:} 
+                              \PY{k}{return} \PY{n}{itera}\PY{o}{+}\PY{l+m+mi}{1}
+                          \PY{n}{val\PYZus{}comp}\PY{o}{+}\PY{o}{=}\PY{l+m+mf}{1000.00}
+                      \PY{k}{return} \PY{l+m+mi}{0}
+              \PY{k}{except} \PY{n+ne}{ValueError}\PY{p}{:} 
+                  \PY{k}{return} \PY{l+m+mi}{0}
+          \PY{k}{def} \PY{n+nf}{total\PYZus{}pymnt\PYZus{}strat}\PY{p}{(}\PY{n}{receiy}\PY{p}{)}\PY{p}{:}
+              \PY{k}{try}\PY{p}{:}
+                  \PY{k}{if}\PY{p}{(}\PY{n}{receiy} \PY{o+ow}{is} \PY{k+kc}{None}\PY{p}{)}\PY{p}{:}
+                      \PY{k}{return} \PY{l+m+mi}{0}
+                  \PY{k}{else}\PY{p}{:}
+                      \PY{n}{val\PYZus{}str}\PY{o}{=}\PY{n+nb}{float}\PY{p}{(}\PY{n}{receiy}\PY{p}{)}
+                      \PY{n}{val\PYZus{}comp}\PY{o}{=}\PY{l+m+mf}{0.00}
+                      \PY{k}{for} \PY{n}{itera} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{30}\PY{p}{)}\PY{p}{:}
+                          \PY{k}{if}\PY{p}{(}\PY{n}{val\PYZus{}str} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n}{val\PYZus{}comp} \PY{o+ow}{and} \PY{n}{val\PYZus{}str} \PY{o}{\PYZlt{}} \PY{p}{(}\PY{n}{val\PYZus{}comp}\PY{o}{+}\PY{l+m+mf}{2001.00}\PY{p}{)}\PY{p}{)}\PY{p}{:} 
+                              \PY{k}{return} \PY{n}{itera}\PY{o}{+}\PY{l+m+mi}{1}
+                          \PY{n}{val\PYZus{}comp}\PY{o}{+}\PY{o}{=}\PY{l+m+mf}{2000.00}
+                      \PY{k}{return} \PY{l+m+mi}{0}
+              \PY{k}{except} \PY{n+ne}{ValueError}\PY{p}{:} 
+                  \PY{k}{return} \PY{l+m+mi}{0}
+          \PY{k}{def} \PY{n+nf}{total\PYZus{}pymnt\PYZus{}inv\PYZus{}strat}\PY{p}{(}\PY{n}{receiy}\PY{p}{)}\PY{p}{:}
+              \PY{k}{try}\PY{p}{:}
+                  \PY{k}{if}\PY{p}{(}\PY{n}{receiy} \PY{o+ow}{is} \PY{k+kc}{None}\PY{p}{)}\PY{p}{:}
+                      \PY{k}{return} \PY{l+m+mi}{0}
+                  \PY{k}{else}\PY{p}{:}
+                      \PY{n}{val\PYZus{}str}\PY{o}{=}\PY{n+nb}{float}\PY{p}{(}\PY{n}{receiy}\PY{p}{)}
+                      \PY{n}{val\PYZus{}comp}\PY{o}{=}\PY{l+m+mf}{0.00}
+                      \PY{k}{for} \PY{n}{itera} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{30}\PY{p}{)}\PY{p}{:}
+                          \PY{k}{if}\PY{p}{(}\PY{n}{val\PYZus{}str} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n}{val\PYZus{}comp} \PY{o+ow}{and} \PY{n}{val\PYZus{}str} \PY{o}{\PYZlt{}} \PY{p}{(}\PY{n}{val\PYZus{}comp}\PY{o}{+}\PY{l+m+mf}{2001.00}\PY{p}{)}\PY{p}{)}\PY{p}{:} 
+                              \PY{k}{return} \PY{n}{itera}\PY{o}{+}\PY{l+m+mi}{1}
+                          \PY{n}{val\PYZus{}comp}\PY{o}{+}\PY{o}{=}\PY{l+m+mf}{2000.00}
+                      \PY{k}{return} \PY{l+m+mi}{0}
+              \PY{k}{except} \PY{n+ne}{ValueError}\PY{p}{:} 
+                  \PY{k}{return} \PY{l+m+mi}{0}
+          \PY{k}{def} \PY{n+nf}{total\PYZus{}rec\PYZus{}prncp\PYZus{}strat}\PY{p}{(}\PY{n}{receiy}\PY{p}{)}\PY{p}{:}
+              \PY{k}{try}\PY{p}{:}
+                  \PY{k}{if}\PY{p}{(}\PY{n}{receiy} \PY{o+ow}{is} \PY{k+kc}{None}\PY{p}{)}\PY{p}{:}
+                      \PY{k}{return} \PY{l+m+mi}{0}
+                  \PY{k}{else}\PY{p}{:}
+                      \PY{n}{val\PYZus{}str}\PY{o}{=}\PY{n+nb}{float}\PY{p}{(}\PY{n}{receiy}\PY{p}{)}
+                      \PY{n}{val\PYZus{}comp}\PY{o}{=}\PY{l+m+mf}{0.00}
+                      \PY{k}{for} \PY{n}{itera} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{14}\PY{p}{)}\PY{p}{:}
+                          \PY{k}{if}\PY{p}{(}\PY{n}{val\PYZus{}str} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n}{val\PYZus{}comp} \PY{o+ow}{and} \PY{n}{val\PYZus{}str} \PY{o}{\PYZlt{}} \PY{p}{(}\PY{n}{val\PYZus{}comp}\PY{o}{+}\PY{l+m+mf}{2501.00}\PY{p}{)}\PY{p}{)}\PY{p}{:} 
+                              \PY{k}{return} \PY{n}{itera}\PY{o}{+}\PY{l+m+mi}{1}
+                          \PY{n}{val\PYZus{}comp}\PY{o}{+}\PY{o}{=}\PY{l+m+mf}{2500.00}
+                      \PY{k}{return} \PY{l+m+mi}{0}
+              \PY{k}{except} \PY{n+ne}{ValueError}\PY{p}{:} 
+                  \PY{k}{return} \PY{l+m+mi}{0}
+          \PY{k}{def} \PY{n+nf}{total\PYZus{}rec\PYZus{}int\PYZus{}strat}\PY{p}{(}\PY{n}{receiy}\PY{p}{)}\PY{p}{:}
+              \PY{k}{try}\PY{p}{:}
+                  \PY{k}{if}\PY{p}{(}\PY{n}{receiy} \PY{o+ow}{is} \PY{k+kc}{None}\PY{p}{)}\PY{p}{:}
+                      \PY{k}{return} \PY{l+m+mi}{0}
+                  \PY{k}{else}\PY{p}{:}
+                      \PY{n}{val\PYZus{}str}\PY{o}{=}\PY{n+nb}{float}\PY{p}{(}\PY{n}{receiy}\PY{p}{)}
+                      \PY{n}{val\PYZus{}comp}\PY{o}{=}\PY{l+m+mf}{0.00}
+                      \PY{k}{for} \PY{n}{itera} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{14}\PY{p}{)}\PY{p}{:}
+                          \PY{k}{if}\PY{p}{(}\PY{n}{val\PYZus{}str} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n}{val\PYZus{}comp} \PY{o+ow}{and} \PY{n}{val\PYZus{}str} \PY{o}{\PYZlt{}} \PY{p}{(}\PY{n}{val\PYZus{}comp}\PY{o}{+}\PY{l+m+mf}{2501.00}\PY{p}{)}\PY{p}{)}\PY{p}{:} 
+                              \PY{k}{return} \PY{n}{itera}\PY{o}{+}\PY{l+m+mi}{1}
+                          \PY{n}{val\PYZus{}comp}\PY{o}{+}\PY{o}{=}\PY{l+m+mf}{2500.00}
+                      \PY{k}{return} \PY{l+m+mi}{0}
+              \PY{k}{except} \PY{n+ne}{ValueError}\PY{p}{:} 
+                  \PY{k}{return} \PY{l+m+mi}{0}
+          \PY{k}{def} \PY{n+nf}{int\PYZus{}rate\PYZus{}strat}\PY{p}{(}\PY{n}{receiy}\PY{p}{)}\PY{p}{:}
+              \PY{k}{try}\PY{p}{:}
+                  \PY{k}{if}\PY{p}{(}\PY{n}{receiy} \PY{o+ow}{is} \PY{k+kc}{None}\PY{p}{)}\PY{p}{:}
+                      \PY{k}{return} \PY{l+m+mi}{0}
+                  \PY{k}{else}\PY{p}{:}
+                      \PY{n}{val\PYZus{}str}\PY{o}{=}\PY{n+nb}{float}\PY{p}{(}\PY{n}{receiy}\PY{p}{)}
+                      \PY{n}{val\PYZus{}comp}\PY{o}{=}\PY{l+m+mf}{0.00}
+                      \PY{k}{for} \PY{n}{itera} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{16}\PY{p}{)}\PY{p}{:}
+                          \PY{k}{if}\PY{p}{(}\PY{n}{val\PYZus{}str} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n}{val\PYZus{}comp} \PY{o+ow}{and} \PY{n}{val\PYZus{}str} \PY{o}{\PYZlt{}} \PY{p}{(}\PY{n}{val\PYZus{}comp}\PY{o}{+}\PY{l+m+mf}{1.00}\PY{p}{)}\PY{p}{)}\PY{p}{:} 
+                              \PY{k}{return} \PY{n}{itera}\PY{o}{+}\PY{l+m+mi}{1}
+                          \PY{n}{val\PYZus{}comp}\PY{o}{+}\PY{o}{=}\PY{l+m+mf}{1.00}
+                      \PY{k}{return} \PY{l+m+mi}{0}
+              \PY{k}{except} \PY{n+ne}{ValueError}\PY{p}{:} 
+                  \PY{k}{return} \PY{l+m+mi}{0}
+          \PY{k}{def} \PY{n+nf}{dti\PYZus{}strat}\PY{p}{(}\PY{n}{receiy}\PY{p}{)}\PY{p}{:}
+              \PY{k}{try}\PY{p}{:}
+                  \PY{k}{if}\PY{p}{(}\PY{n}{receiy} \PY{o+ow}{is} \PY{k+kc}{None}\PY{p}{)}\PY{p}{:}
+                      \PY{k}{return} \PY{l+m+mi}{0}
+                  \PY{k}{else}\PY{p}{:}
+                      \PY{n}{val\PYZus{}str}\PY{o}{=}\PY{n+nb}{float}\PY{p}{(}\PY{n}{receiy}\PY{p}{)}
+                      \PY{n}{val\PYZus{}comp}\PY{o}{=}\PY{l+m+mf}{0.00}
+                      \PY{k}{for} \PY{n}{itera} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{)}\PY{p}{:}
+                          \PY{k}{if}\PY{p}{(}\PY{n}{val\PYZus{}str} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n}{val\PYZus{}comp} \PY{o+ow}{and} \PY{n}{val\PYZus{}str} \PY{o}{\PYZlt{}} \PY{p}{(}\PY{n}{val\PYZus{}comp}\PY{o}{+}\PY{l+m+mf}{5.00}\PY{p}{)}\PY{p}{)}\PY{p}{:} 
+                              \PY{k}{return} \PY{n}{itera}\PY{o}{+}\PY{l+m+mi}{1}
+                          \PY{n}{val\PYZus{}comp}\PY{o}{+}\PY{o}{=}\PY{l+m+mf}{5.00}
+                      \PY{k}{return} \PY{l+m+mi}{0}
+              \PY{k}{except} \PY{n+ne}{ValueError}\PY{p}{:} 
+                  \PY{k}{return} \PY{l+m+mi}{0}
+          \PY{k}{def} \PY{n+nf}{inq\PYZus{}last\PYZus{}6mths\PYZus{}strat}\PY{p}{(}\PY{n}{receiy}\PY{p}{)}\PY{p}{:}
+              \PY{k}{try}\PY{p}{:}
+                  \PY{k}{if}\PY{p}{(}\PY{n}{receiy} \PY{o+ow}{is} \PY{k+kc}{None}\PY{p}{)}\PY{p}{:}
+                      \PY{k}{return} \PY{l+m+mi}{0}
+                  \PY{k}{else}\PY{p}{:}
+                      \PY{n}{val\PYZus{}str}\PY{o}{=}\PY{n+nb}{float}\PY{p}{(}\PY{n}{receiy}\PY{p}{)}
+                      \PY{n}{val\PYZus{}comp}\PY{o}{=}\PY{l+m+mf}{0.00}
+                      \PY{k}{for} \PY{n}{itera} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{17}\PY{p}{)}\PY{p}{:}
+                          \PY{k}{if}\PY{p}{(}\PY{n}{val\PYZus{}str} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n}{val\PYZus{}comp} \PY{o+ow}{and} \PY{n}{val\PYZus{}str} \PY{o}{\PYZlt{}} \PY{p}{(}\PY{n}{val\PYZus{}comp}\PY{o}{+}\PY{l+m+mf}{2.00}\PY{p}{)}\PY{p}{)}\PY{p}{:} 
+                              \PY{k}{return} \PY{n}{itera}\PY{o}{+}\PY{l+m+mi}{1}
+                          \PY{n}{val\PYZus{}comp}\PY{o}{+}\PY{o}{=}\PY{l+m+mf}{2.00}
+                      \PY{k}{return} \PY{l+m+mi}{0}
+              \PY{k}{except} \PY{n+ne}{ValueError}\PY{p}{:} 
+                  \PY{k}{return} \PY{l+m+mi}{0}
+          \PY{k}{def} \PY{n+nf}{pub\PYZus{}rec\PYZus{}strat}\PY{p}{(}\PY{n}{receiy}\PY{p}{)}\PY{p}{:}
+              \PY{k}{try}\PY{p}{:}
+                  \PY{k}{if}\PY{p}{(}\PY{n}{receiy} \PY{o+ow}{is} \PY{k+kc}{None}\PY{p}{)}\PY{p}{:}
+                      \PY{k}{return} \PY{l+m+mi}{0}
+                  \PY{k}{else}\PY{p}{:}
+                      \PY{n}{val\PYZus{}str}\PY{o}{=}\PY{n+nb}{float}\PY{p}{(}\PY{n}{receiy}\PY{p}{)}
+                      \PY{n}{val\PYZus{}comp}\PY{o}{=}\PY{l+m+mf}{0.00}
+                      \PY{k}{for} \PY{n}{itera} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{25}\PY{p}{)}\PY{p}{:}
+                          \PY{k}{if}\PY{p}{(}\PY{n}{val\PYZus{}str} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n}{val\PYZus{}comp} \PY{o+ow}{and} \PY{n}{val\PYZus{}str} \PY{o}{\PYZlt{}} \PY{p}{(}\PY{n}{val\PYZus{}comp}\PY{o}{+}\PY{l+m+mf}{4.00}\PY{p}{)}\PY{p}{)}\PY{p}{:} 
+                              \PY{k}{return} \PY{n}{itera}\PY{o}{+}\PY{l+m+mi}{1}
+                          \PY{n}{val\PYZus{}comp}\PY{o}{+}\PY{o}{=}\PY{l+m+mf}{4.00}
+                      \PY{k}{return} \PY{l+m+mi}{0}
+              \PY{k}{except} \PY{n+ne}{ValueError}\PY{p}{:} 
+                  \PY{k}{return} \PY{l+m+mi}{0}
+          \PY{k}{def} \PY{n+nf}{total\PYZus{}acc\PYZus{}strat}\PY{p}{(}\PY{n}{receiy}\PY{p}{)}\PY{p}{:}
+              \PY{k}{try}\PY{p}{:}
+                  \PY{k}{if}\PY{p}{(}\PY{n}{receiy} \PY{o+ow}{is} \PY{k+kc}{None}\PY{p}{)}\PY{p}{:}
+                      \PY{k}{return} \PY{l+m+mi}{0}
+                  \PY{k}{else}\PY{p}{:}
+                      \PY{n}{val\PYZus{}str}\PY{o}{=}\PY{n+nb}{float}\PY{p}{(}\PY{n}{receiy}\PY{p}{)}
+                      \PY{n}{val\PYZus{}comp}\PY{o}{=}\PY{l+m+mf}{0.00}
+                      \PY{k}{for} \PY{n}{itera} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{40}\PY{p}{)}\PY{p}{:}
+                          \PY{k}{if}\PY{p}{(}\PY{n}{val\PYZus{}str} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n}{val\PYZus{}comp} \PY{o+ow}{and} \PY{n}{val\PYZus{}str} \PY{o}{\PYZlt{}} \PY{p}{(}\PY{n}{val\PYZus{}comp}\PY{o}{+}\PY{l+m+mf}{500.00}\PY{p}{)}\PY{p}{)}\PY{p}{:} 
+                              \PY{k}{return} \PY{n}{itera}\PY{o}{+}\PY{l+m+mi}{1}
+                          \PY{n}{val\PYZus{}comp}\PY{o}{+}\PY{o}{=}\PY{l+m+mf}{500.00}
+                      \PY{k}{return} \PY{l+m+mi}{0}
+              \PY{k}{except} \PY{n+ne}{ValueError}\PY{p}{:} 
+                  \PY{k}{return} \PY{l+m+mi}{0}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{total\PYZus{}acc\PYZus{}strat}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2134.5}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+5
+
+    \end{Verbatim}
+
+    \hypertarget{decode-variables}{%
+\subsubsection{Decode Variables}\label{decode-variables}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}116}]:} \PY{k}{def} \PY{n+nf}{decode\PYZus{}variable}\PY{p}{(}\PY{n}{variable}\PY{p}{,}\PY{n}{value}\PY{p}{)}\PY{p}{:}
+              \PY{k}{if}\PY{p}{(}\PY{n}{value} \PY{o+ow}{is} \PY{k+kc}{None} \PY{o+ow}{or} \PY{n}{variable} \PY{o+ow}{is} \PY{k+kc}{None}\PY{p}{)}\PY{p}{:}
+                  \PY{k}{return} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{No found}\PY{l+s+s1}{\PYZsq{}}
+              \PY{k}{else}\PY{p}{:}
+                  \PY{k}{if}\PY{p}{(}\PY{n}{variable}\PY{o}{==}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{loan\PYZus{}status\PYZus{}int}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{:}
+                      \PY{k}{if}\PY{p}{(}\PY{n}{value}\PY{o}{==}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                          \PY{k}{return} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fully\PYZus{}Paid}\PY{l+s+s1}{\PYZsq{}}
+                      \PY{k}{elif}\PY{p}{(}\PY{n}{value}\PY{o}{==}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{:}
+                          \PY{k}{return} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Charged\PYZus{}Off}\PY{l+s+s1}{\PYZsq{}}
+                      \PY{k}{elif}\PY{p}{(}\PY{n}{value}\PY{o}{==}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{:}
+                          \PY{k}{return} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Current}\PY{l+s+s1}{\PYZsq{}}
+                      \PY{k}{elif}\PY{p}{(}\PY{n}{value}\PY{o}{==}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{:}
+                          \PY{k}{return} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Default}\PY{l+s+s1}{\PYZsq{}}
+                      \PY{k}{elif}\PY{p}{(}\PY{n}{value}\PY{o}{==}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{:}
+                          \PY{k}{return} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{In\PYZus{}Grace\PYZus{}Period}\PY{l+s+s1}{\PYZsq{}}
+                      \PY{k}{elif}\PY{p}{(}\PY{n}{value}\PY{o}{==}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{:}
+                          \PY{k}{return} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Late\PYZus{}(31\PYZhy{}120\PYZus{}days)}\PY{l+s+s1}{\PYZsq{}}
+                      \PY{k}{else}\PY{p}{:}
+                          \PY{k}{return} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{No found}\PY{l+s+s1}{\PYZsq{}}
+                  \PY{k}{elif}\PY{p}{(}\PY{n}{variable}\PY{o}{==}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{term\PYZus{}int}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{:}
+                      \PY{k}{if}\PY{p}{(}\PY{n}{value}\PY{o}{==}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                          \PY{k}{return} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{36\PYZus{}months}\PY{l+s+s1}{\PYZsq{}}
+                      \PY{k}{if}\PY{p}{(}\PY{n}{value}\PY{o}{==}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{:}
+                          \PY{k}{return} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{60\PYZus{}months}\PY{l+s+s1}{\PYZsq{}}
+                  \PY{k}{elif}\PY{p}{(}\PY{n}{variable}\PY{o}{==}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{grade\PYZus{}int}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{:}
+                      \PY{n}{alfa} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ABCDEFG}\PY{l+s+s2}{\PYZdq{}}
+                      \PY{k}{for} \PY{n}{ind}\PY{p}{,}\PY{n}{x} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{alfa}\PY{p}{)}\PY{p}{:}
+                          \PY{k}{if}\PY{p}{(}\PY{p}{(}\PY{n}{ind}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{==}\PY{n}{value}\PY{p}{)}\PY{p}{:}
+                              \PY{k}{return} \PY{n}{x}
+                      \PY{k}{return} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{No\PYZus{}found}\PY{l+s+s1}{\PYZsq{}}
+                  \PY{k}{elif}\PY{p}{(}\PY{n}{variable}\PY{o}{==}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{su\PYZus{}grad\PYZus{}int}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{:}
+                      \PY{n}{alfa} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ABCDEFG}\PY{l+s+s2}{\PYZdq{}}
+                      \PY{n}{numer} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{12345}\PY{l+s+s2}{\PYZdq{}}
+                      \PY{n}{count}\PY{o}{=}\PY{l+m+mi}{1}
+                      \PY{k}{for} \PY{n}{indx}\PY{p}{,}\PY{n}{x} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{alfa}\PY{p}{)}\PY{p}{:}
+                          \PY{k}{for} \PY{n}{indy}\PY{p}{,}\PY{n}{y} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{numer}\PY{p}{)}\PY{p}{:}
+                              \PY{k}{if}\PY{p}{(}\PY{p}{(}\PY{n}{count}\PY{p}{)} \PY{o}{==} \PY{n}{value}\PY{p}{)}\PY{p}{:}
+                                  \PY{k}{return} \PY{n}{x}\PY{o}{+}\PY{n}{y}
+                              \PY{n}{count}\PY{o}{+}\PY{o}{=}\PY{l+m+mi}{1}
+                      \PY{k}{return} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{No\PYZus{}found}\PY{l+s+s1}{\PYZsq{}}
+                  \PY{k}{elif}\PY{p}{(}\PY{n}{variable}\PY{o}{==}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{homeowner\PYZus{}int}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{:}
+                      \PY{k}{if}\PY{p}{(}\PY{n}{value}\PY{o}{==}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                          \PY{k}{return} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MORTAGE}\PY{l+s+s1}{\PYZsq{}}
+                      \PY{k}{elif}\PY{p}{(}\PY{n}{value}\PY{o}{==}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{:}
+                          \PY{k}{return} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{OWN}\PY{l+s+s1}{\PYZsq{}}
+                      \PY{k}{elif}\PY{p}{(}\PY{n}{value}\PY{o}{==}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{:}
+                          \PY{k}{return} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{RENT}\PY{l+s+s1}{\PYZsq{}}
+                      \PY{k}{else}\PY{p}{:}
+                          \PY{k}{return} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{No\PYZus{}found}\PY{l+s+s1}{\PYZsq{}}        
+                  \PY{k}{elif}\PY{p}{(}\PY{n}{variable}\PY{o}{==}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{veri\PYZus{}sta\PYZus{}int}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{:}
+                      \PY{k}{if}\PY{p}{(}\PY{n}{value}\PY{o}{==}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                          \PY{k}{return} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Not\PYZus{}Verified}\PY{l+s+s1}{\PYZsq{}}
+                      \PY{k}{elif}\PY{p}{(}\PY{n}{value}\PY{o}{==}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{:}
+                          \PY{k}{return} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Verified}\PY{l+s+s1}{\PYZsq{}}
+                      \PY{k}{elif}\PY{p}{(}\PY{n}{value}\PY{o}{==}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{:}
+                          \PY{k}{return} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Source\PYZus{}Verified}\PY{l+s+s1}{\PYZsq{}}
+                      \PY{k}{else}\PY{p}{:}
+                          \PY{k}{return} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{No\PYZus{}found}\PY{l+s+s1}{\PYZsq{}}        
+                  \PY{k}{elif}\PY{p}{(}\PY{n}{variable}\PY{o}{==}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{purpose\PYZus{}int}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{:}
+                      \PY{k}{if}\PY{p}{(}\PY{n}{value}\PY{o}{==}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                          \PY{k}{return} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{credit\PYZus{}card}\PY{l+s+s1}{\PYZsq{}}
+                      \PY{k}{elif}\PY{p}{(}\PY{n}{value}\PY{o}{==}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{:}
+                          \PY{k}{return} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{debt\PYZus{}consolidation}\PY{l+s+s1}{\PYZsq{}}
+                      \PY{k}{elif}\PY{p}{(}\PY{n}{value}\PY{o}{==}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{:}
+                          \PY{k}{return} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{home\PYZus{}improvement}\PY{l+s+s1}{\PYZsq{}}
+                      \PY{k}{elif}\PY{p}{(}\PY{n}{value}\PY{o}{==}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{:}
+                          \PY{k}{return} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{house}\PY{l+s+s1}{\PYZsq{}}
+                      \PY{k}{elif}\PY{p}{(}\PY{n}{value}\PY{o}{==}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{:}
+                          \PY{k}{return} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{major\PYZus{}purchase}\PY{l+s+s1}{\PYZsq{}}
+                      \PY{k}{elif}\PY{p}{(}\PY{n}{value}\PY{o}{==}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{:}
+                          \PY{k}{return} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{medical}\PY{l+s+s1}{\PYZsq{}}
+                      \PY{k}{elif}\PY{p}{(}\PY{n}{value}\PY{o}{==}\PY{l+m+mi}{7}\PY{p}{)}\PY{p}{:}
+                          \PY{k}{return} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{moving}\PY{l+s+s1}{\PYZsq{}}
+                      \PY{k}{elif}\PY{p}{(}\PY{n}{value}\PY{o}{==}\PY{l+m+mi}{8}\PY{p}{)}\PY{p}{:}
+                          \PY{k}{return} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{other}\PY{l+s+s1}{\PYZsq{}}
+                      \PY{k}{elif}\PY{p}{(}\PY{n}{value}\PY{o}{==}\PY{l+m+mi}{9}\PY{p}{)}\PY{p}{:}
+                          \PY{k}{return} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{renewable\PYZus{}energi}\PY{l+s+s1}{\PYZsq{}}
+                      \PY{k}{elif}\PY{p}{(}\PY{n}{value}\PY{o}{==}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{:}
+                          \PY{k}{return} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{small\PYZus{}business}\PY{l+s+s1}{\PYZsq{}}
+                      \PY{k}{elif}\PY{p}{(}\PY{n}{value}\PY{o}{==}\PY{l+m+mi}{11}\PY{p}{)}\PY{p}{:}
+                          \PY{k}{return} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{vacation}\PY{l+s+s1}{\PYZsq{}}
+                      \PY{k}{elif}\PY{p}{(}\PY{n}{value}\PY{o}{==}\PY{l+m+mi}{12}\PY{p}{)}\PY{p}{:}
+                          \PY{k}{return} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{wedding}\PY{l+s+s1}{\PYZsq{}}
+                      \PY{k}{elif}\PY{p}{(}\PY{n}{value}\PY{o}{==}\PY{l+m+mi}{13}\PY{p}{)}\PY{p}{:}
+                          \PY{k}{return} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{car}\PY{l+s+s1}{\PYZsq{}}
+                      \PY{k}{else}\PY{p}{:}
+                          \PY{k}{return} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{No\PYZus{}found}\PY{l+s+s1}{\PYZsq{}}  
+                  \PY{k}{elif}\PY{p}{(}\PY{n}{variable}\PY{o}{==}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{emp\PYZus{}length\PYZus{}int}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{:}
+                      \PY{k}{if}\PY{p}{(}\PY{n}{value}\PY{o}{==}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                          \PY{k}{return} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZlt{} 1 year}\PY{l+s+s2}{\PYZdq{}}
+                      \PY{k}{elif}\PY{p}{(}\PY{n}{value}\PY{o}{==}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{:}
+                          \PY{k}{return} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{10+ years}\PY{l+s+s1}{\PYZsq{}}
+                      \PY{k}{else}\PY{p}{:}
+                          \PY{k}{for} \PY{n}{item} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{:}
+                              \PY{k}{if}\PY{p}{(}\PY{n}{item} \PY{o}{==} \PY{n}{value}\PY{p}{)}\PY{p}{:}
+                                  \PY{k}{return} \PY{n+nb}{str}\PY{p}{(}\PY{n}{item}\PY{p}{)}\PY{o}{+}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ years}\PY{l+s+s2}{\PYZdq{}}
+                          \PY{k}{return} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{No\PYZus{}found}\PY{l+s+s1}{\PYZsq{}}  
+                  \PY{k}{elif}\PY{p}{(}\PY{n}{variable}\PY{o}{==}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{loan\PYZus{}amnt\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}} \PY{o+ow}{or} \PY{n}{variable}\PY{o}{==}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{funded\PYZus{}amnt\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}  
+                       \PY{o+ow}{or} \PY{n}{variable}\PY{o}{==}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{annual\PYZus{}inc\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}} \PY{o+ow}{or} \PY{n}{variable}\PY{o}{==}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{revol\PYZus{}bal\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}
+                       \PY{o+ow}{or} \PY{n}{variable}\PY{o}{==}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{revol\PYZus{}util\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}} \PY{o+ow}{or} \PY{n}{variable}\PY{o}{==}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{total\PYZus{}pymnt\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}} 
+                       \PY{o+ow}{or} \PY{n}{variable}\PY{o}{==}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{total\PYZus{}pymnt\PYZus{}inv\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}  \PY{o+ow}{or} \PY{n}{variable}\PY{o}{==}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{total\PYZus{}rec\PYZus{}int\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}} 
+                       \PY{o+ow}{or} \PY{n}{variable}\PY{o}{==}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{total\PYZus{}rec\PYZus{}prncp\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}  \PY{o+ow}{or} \PY{n}{variable}\PY{o}{==}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{total\PYZus{}acc\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}
+                       \PY{o+ow}{or} \PY{n}{variable}\PY{o}{==}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{int\PYZus{}rate\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}  \PY{o+ow}{or} \PY{n}{variable}\PY{o}{==}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{dti\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}
+                       \PY{o+ow}{or} \PY{n}{variable}\PY{o}{==}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{inq\PYZus{}last\PYZus{}6mths\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}  \PY{o+ow}{or} \PY{n}{variable}\PY{o}{==}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pub\PYZus{}rec\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}
+                       \PY{p}{)}\PY{p}{:}        
+                      \PY{n}{val\PYZus{}comp}\PY{o}{=}\PY{l+m+mi}{0}
+                      \PY{n}{max\PYZus{}value}\PY{o}{=}\PY{l+m+mi}{0}
+                      \PY{n}{incrementer}\PY{o}{=}\PY{l+m+mi}{0}
+                      \PY{k}{if}\PY{p}{(}\PY{n}{variable}\PY{o}{==}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{loan\PYZus{}amnt\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}} \PY{o+ow}{or} \PY{n}{variable}\PY{o}{==}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{funded\PYZus{}amnt\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{:}
+                          \PY{n}{max\PYZus{}value}\PY{o}{=}\PY{l+m+mi}{7}
+                          \PY{n}{incrementer}\PY{o}{=}\PY{l+m+mi}{5000}
+                      \PY{k}{elif}\PY{p}{(}\PY{n}{variable}\PY{o}{==}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{annual\PYZus{}inc\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{:}
+                          \PY{n}{max\PYZus{}value}\PY{o}{=}\PY{l+m+mi}{105}
+                          \PY{n}{incrementer}\PY{o}{=}\PY{l+m+mi}{5000}
+                      \PY{k}{elif}\PY{p}{(}\PY{n}{variable}\PY{o}{==}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{revol\PYZus{}bal\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{:}
+                          \PY{n}{max\PYZus{}value}\PY{o}{=}\PY{l+m+mi}{66}
+                          \PY{n}{incrementer}\PY{o}{=}\PY{l+m+mi}{2000}
+                      \PY{k}{elif}\PY{p}{(}\PY{n}{variable}\PY{o}{==}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{revol\PYZus{}util\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{:}
+                          \PY{n}{max\PYZus{}value}\PY{o}{=}\PY{l+m+mi}{66}
+                          \PY{n}{incrementer}\PY{o}{=}\PY{l+m+mi}{1000}
+                      \PY{k}{elif}\PY{p}{(}\PY{n}{variable}\PY{o}{==}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{total\PYZus{}pymnt\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}} \PY{o+ow}{or} \PY{n}{variable}\PY{o}{==}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{total\PYZus{}pymnt\PYZus{}inv\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{:}
+                          \PY{n}{max\PYZus{}value}\PY{o}{=}\PY{l+m+mi}{30}
+                          \PY{n}{incrementer}\PY{o}{=}\PY{l+m+mi}{2000}
+                      \PY{k}{elif}\PY{p}{(}\PY{n}{variable}\PY{o}{==}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{total\PYZus{}rec\PYZus{}int\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}} \PY{o+ow}{or} \PY{n}{variable}\PY{o}{==}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{total\PYZus{}rec\PYZus{}prncp\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{:}
+                          \PY{n}{max\PYZus{}value}\PY{o}{=}\PY{l+m+mi}{14}
+                          \PY{n}{incrementer}\PY{o}{=}\PY{l+m+mi}{2500}
+                      \PY{k}{elif}\PY{p}{(}\PY{n}{variable}\PY{o}{==}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{int\PYZus{}rate\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{:}
+                          \PY{n}{max\PYZus{}value}\PY{o}{=}\PY{l+m+mi}{16}
+                          \PY{n}{incrementer}\PY{o}{=}\PY{l+m+mi}{1}
+                      \PY{k}{elif}\PY{p}{(}\PY{n}{variable}\PY{o}{==}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{dti\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{:}
+                          \PY{n}{max\PYZus{}value}\PY{o}{=}\PY{l+m+mi}{20}
+                          \PY{n}{incrementer}\PY{o}{=}\PY{l+m+mi}{5}
+                      \PY{k}{elif}\PY{p}{(}\PY{n}{variable}\PY{o}{==}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{inq\PYZus{}last\PYZus{}6mths\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{:}
+                          \PY{n}{max\PYZus{}value}\PY{o}{=}\PY{l+m+mi}{17}
+                          \PY{n}{incrementer}\PY{o}{=}\PY{l+m+mi}{2}
+                      \PY{k}{elif}\PY{p}{(}\PY{n}{variable}\PY{o}{==}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pub\PYZus{}rec\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{:}
+                          \PY{n}{max\PYZus{}value}\PY{o}{=}\PY{l+m+mi}{25}
+                          \PY{n}{incrementer}\PY{o}{=}\PY{l+m+mi}{4}
+                      \PY{k}{elif}\PY{p}{(}\PY{n}{variable}\PY{o}{==}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{total\PYZus{}acc\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{:}
+                          \PY{n}{max\PYZus{}value}\PY{o}{=}\PY{l+m+mi}{40}
+                          \PY{n}{incrementer}\PY{o}{=}\PY{l+m+mi}{500}
+                      \PY{k}{for} \PY{n}{item} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{max\PYZus{}value}\PY{p}{)}\PY{p}{:}
+                          \PY{k}{if}\PY{p}{(}\PY{n}{item}\PY{o}{==}\PY{n}{value}\PY{p}{)}\PY{p}{:}
+                              \PY{k}{return} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{[}\PY{l+s+s2}{\PYZdq{}}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n}{val\PYZus{}comp}\PY{p}{)}\PY{o}{+}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ \PYZhy{} }\PY{l+s+s2}{\PYZdq{}}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n}{val\PYZus{}comp}\PY{o}{+}\PY{n}{incrementer}\PY{p}{)}\PY{o}{+}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{]}\PY{l+s+s2}{\PYZdq{}}
+                          \PY{n}{val\PYZus{}comp}\PY{o}{+}\PY{o}{=}\PY{n}{incrementer}
+                      \PY{k}{return} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{No\PYZus{}found}\PY{l+s+s1}{\PYZsq{}}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{decode\PYZus{}variable}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{total\PYZus{}rec\PYZus{}prncp\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[7500 - 10000]
+
+    \end{Verbatim}
+
+    \hypertarget{stratific-big-numerical-features}{%
+\subsubsection{Stratific Big numerical
+Features}\label{stratific-big-numerical-features}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}117}]:} \PY{c+c1}{\PYZsh{} loan\PYZus{}amnt}
+          \PY{n}{udfloan\PYZus{}amnt\PYZus{}strat} \PY{o}{=} \PY{n}{udf}\PY{p}{(}\PY{n}{loan\PYZus{}amnt\PYZus{}strat}\PY{p}{,} \PY{n}{IntegerType}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+          \PY{n}{datafilterloan} \PY{o}{=} \PY{n}{datafilterloan}\PY{o}{.}\PY{n}{withColumn}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{loan\PYZus{}amnt\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{udfloan\PYZus{}amnt\PYZus{}strat}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{loan\PYZus{}amnt}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{} funded\PYZus{}amnt}
+          \PY{n}{udffunded\PYZus{}amnt\PYZus{}strat} \PY{o}{=} \PY{n}{udf}\PY{p}{(}\PY{n}{funded\PYZus{}amnt\PYZus{}strat}\PY{p}{,} \PY{n}{IntegerType}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+          \PY{n}{datafilterloan} \PY{o}{=} \PY{n}{datafilterloan}\PY{o}{.}\PY{n}{withColumn}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{funded\PYZus{}amnt\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{udffunded\PYZus{}amnt\PYZus{}strat}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{funded\PYZus{}amnt}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{} annual\PYZus{}inc}
+          \PY{n}{udfannual\PYZus{}inc\PYZus{}strat} \PY{o}{=} \PY{n}{udf}\PY{p}{(}\PY{n}{annual\PYZus{}inc\PYZus{}strat}\PY{p}{,} \PY{n}{IntegerType}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+          \PY{n}{datafilterloan} \PY{o}{=} \PY{n}{datafilterloan}\PY{o}{.}\PY{n}{withColumn}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{annual\PYZus{}inc\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{udfannual\PYZus{}inc\PYZus{}strat}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{annual\PYZus{}inc}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{} revol\PYZus{}bal}
+          \PY{n}{udfrevol\PYZus{}bal\PYZus{}strat} \PY{o}{=} \PY{n}{udf}\PY{p}{(}\PY{n}{revol\PYZus{}bal\PYZus{}strat}\PY{p}{,} \PY{n}{IntegerType}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+          \PY{n}{datafilterloan} \PY{o}{=} \PY{n}{datafilterloan}\PY{o}{.}\PY{n}{withColumn}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{revol\PYZus{}bal\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{udfrevol\PYZus{}bal\PYZus{}strat}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{revol\PYZus{}bal}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{} revol\PYZus{}util}
+          \PY{n}{udfrevol\PYZus{}util\PYZus{}strat} \PY{o}{=} \PY{n}{udf}\PY{p}{(}\PY{n}{revol\PYZus{}util\PYZus{}strat}\PY{p}{,} \PY{n}{IntegerType}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+          \PY{n}{datafilterloan} \PY{o}{=} \PY{n}{datafilterloan}\PY{o}{.}\PY{n}{withColumn}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{revol\PYZus{}util\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{udfrevol\PYZus{}util\PYZus{}strat}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{revol\PYZus{}util}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{} total\PYZus{}pymnt 60000, cada 5000}
+          \PY{n}{udftotal\PYZus{}pymnt\PYZus{}strat} \PY{o}{=} \PY{n}{udf}\PY{p}{(}\PY{n}{total\PYZus{}pymnt\PYZus{}strat}\PY{p}{,} \PY{n}{IntegerType}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+          \PY{n}{datafilterloan} \PY{o}{=} \PY{n}{datafilterloan}\PY{o}{.}\PY{n}{withColumn}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{total\PYZus{}pymnt\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{udftotal\PYZus{}pymnt\PYZus{}strat}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{total\PYZus{}pymnt}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{} total\PYZus{}pymnt\PYZus{}inv 60000, cada 5000}
+          \PY{n}{udftotal\PYZus{}pymnt\PYZus{}inv\PYZus{}strat} \PY{o}{=} \PY{n}{udf}\PY{p}{(}\PY{n}{total\PYZus{}pymnt\PYZus{}inv\PYZus{}strat}\PY{p}{,} \PY{n}{IntegerType}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+          \PY{n}{datafilterloan} \PY{o}{=} \PY{n}{datafilterloan}\PY{o}{.}\PY{n}{withColumn}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{total\PYZus{}pymnt\PYZus{}inv\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{udftotal\PYZus{}pymnt\PYZus{}inv\PYZus{}strat}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{total\PYZus{}pymnt\PYZus{}inv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{} total\PYZus{}rec\PYZus{}prncp 35000, cada 2500}
+          \PY{n}{udftotal\PYZus{}rec\PYZus{}prncp\PYZus{}strat} \PY{o}{=} \PY{n}{udf}\PY{p}{(}\PY{n}{total\PYZus{}rec\PYZus{}prncp\PYZus{}strat}\PY{p}{,} \PY{n}{IntegerType}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+          \PY{n}{datafilterloan} \PY{o}{=} \PY{n}{datafilterloan}\PY{o}{.}\PY{n}{withColumn}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{total\PYZus{}rec\PYZus{}prncp\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{udftotal\PYZus{}rec\PYZus{}prncp\PYZus{}strat}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{total\PYZus{}rec\PYZus{}prncp}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{} total\PYZus{}rec\PYZus{}int 35000, cada 2500}
+          \PY{n}{udftotal\PYZus{}rec\PYZus{}int\PYZus{}strat} \PY{o}{=} \PY{n}{udf}\PY{p}{(}\PY{n}{total\PYZus{}rec\PYZus{}int\PYZus{}strat}\PY{p}{,} \PY{n}{IntegerType}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+          \PY{n}{datafilterloan} \PY{o}{=} \PY{n}{datafilterloan}\PY{o}{.}\PY{n}{withColumn}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{total\PYZus{}rec\PYZus{}int\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{udftotal\PYZus{}rec\PYZus{}int\PYZus{}strat}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{total\PYZus{}rec\PYZus{}int}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{} int\PYZus{}rate 16, cada 1}
+          \PY{n}{udfint\PYZus{}rate\PYZus{}strat} \PY{o}{=} \PY{n}{udf}\PY{p}{(}\PY{n}{int\PYZus{}rate\PYZus{}strat}\PY{p}{,} \PY{n}{IntegerType}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+          \PY{n}{datafilterloan} \PY{o}{=} \PY{n}{datafilterloan}\PY{o}{.}\PY{n}{withColumn}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{int\PYZus{}rate\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{udfint\PYZus{}rate\PYZus{}strat}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{int\PYZus{}rate}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{} dti 20, cada 5}
+          \PY{n}{udfdti\PYZus{}strat} \PY{o}{=} \PY{n}{udf}\PY{p}{(}\PY{n}{dti\PYZus{}strat}\PY{p}{,} \PY{n}{IntegerType}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+          \PY{n}{datafilterloan} \PY{o}{=} \PY{n}{datafilterloan}\PY{o}{.}\PY{n}{withColumn}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{dti\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{udfdti\PYZus{}strat}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{dti}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{} inq\PYZus{}last\PYZus{}6mths 34, cada 2}
+          \PY{n}{udfinq\PYZus{}last\PYZus{}6mths\PYZus{}strat} \PY{o}{=} \PY{n}{udf}\PY{p}{(}\PY{n}{inq\PYZus{}last\PYZus{}6mths\PYZus{}strat}\PY{p}{,} \PY{n}{IntegerType}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+          \PY{n}{datafilterloan} \PY{o}{=} \PY{n}{datafilterloan}\PY{o}{.}\PY{n}{withColumn}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{inq\PYZus{}last\PYZus{}6mths\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{udfinq\PYZus{}last\PYZus{}6mths\PYZus{}strat}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{inq\PYZus{}last\PYZus{}6mths}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{} pub\PYZus{}rec 100, cada 4}
+          \PY{n}{udfpub\PYZus{}rec\PYZus{}strat} \PY{o}{=} \PY{n}{udf}\PY{p}{(}\PY{n}{pub\PYZus{}rec\PYZus{}strat}\PY{p}{,} \PY{n}{IntegerType}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+          \PY{n}{datafilterloan} \PY{o}{=} \PY{n}{datafilterloan}\PY{o}{.}\PY{n}{withColumn}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pub\PYZus{}rec\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{udfpub\PYZus{}rec\PYZus{}strat}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pub\PYZus{}rec}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{} total\PYZus{}acc 40, cada 500}
+          \PY{n}{udftotal\PYZus{}acc\PYZus{}strat} \PY{o}{=} \PY{n}{udf}\PY{p}{(}\PY{n}{total\PYZus{}acc\PYZus{}strat}\PY{p}{,} \PY{n}{IntegerType}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+          \PY{n}{datafilterloan} \PY{o}{=} \PY{n}{datafilterloan}\PY{o}{.}\PY{n}{withColumn}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{total\PYZus{}acc\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{udftotal\PYZus{}acc\PYZus{}strat}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{total\PYZus{}acc}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{test-of-stratificaties-values}{%
+\subsubsection{Test of Stratificaties
+values}\label{test-of-stratificaties-values}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}118}]:} \PY{n}{datafilterloan}\PY{o}{.}\PY{n}{select}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{loan\PYZus{}amnt\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{funded\PYZus{}amnt\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{annual\PYZus{}inc\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{revol\PYZus{}bal\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{revol\PYZus{}util\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{total\PYZus{}pymnt\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{total\PYZus{}pymnt\PYZus{}inv\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{total\PYZus{}rec\PYZus{}prncp\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{total\PYZus{}rec\PYZus{}int\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{int\PYZus{}rate\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{dti\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{inq\PYZus{}last\PYZus{}6mths\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pub\PYZus{}rec\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{total\PYZus{}acc\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
++---------------+-----------------+----------------+---------------+----------------+-----------------+---------------------+---------------------+-------------------+--------------+---------+--------------------+-------------+---------------+
+|loan\_amnt\_strat|funded\_amnt\_strat|annual\_inc\_strat|revol\_bal\_strat|revol\_util\_strat|total\_pymnt\_strat|total\_pymnt\_inv\_strat|total\_rec\_prncp\_strat|total\_rec\_int\_strat|int\_rate\_strat|dti\_strat|inq\_last\_6mths\_strat|pub\_rec\_strat|total\_acc\_strat|
++---------------+-----------------+----------------+---------------+----------------+-----------------+---------------------+---------------------+-------------------+--------------+---------+--------------------+-------------+---------------+
+|              1|                1|               5|              7|               1|                3|                    3|                    2|                  1|            11|        6|                   1|            1|              1|
+|              1|                1|               6|              1|               1|                1|                    1|                    1|                  1|            16|        1|                   3|            1|              1|
+|              1|                1|               3|              2|               1|                2|                    2|                    1|                  1|            16|        2|                   2|            1|              1|
+|              2|                2|              10|              3|               1|                7|                    7|                    4|                  1|            14|        5|                   1|            1|              1|
+|              1|                1|              16|             14|               1|                2|                    2|                    1|                  1|            13|        4|                   1|            1|              1|
++---------------+-----------------+----------------+---------------+----------------+-----------------+---------------------+---------------------+-------------------+--------------+---------+--------------------+-------------+---------------+
+only showing top 5 rows
+
+
+    \end{Verbatim}
+
+    \hypertarget{clean-data-loan}{%
+\subsubsection{Clean Data Loan}\label{clean-data-loan}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}119}]:} \PY{n}{cleandataloan}\PY{o}{=}\PY{n}{datafilterloan}\PY{o}{.}\PY{n}{select}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{loan\PYZus{}status\PYZus{}int}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{term\PYZus{}int}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{grade\PYZus{}int}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{su\PYZus{}grad\PYZus{}int}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{homeowner\PYZus{}int}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{veri\PYZus{}sta\PYZus{}int}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{purpose\PYZus{}int}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{emp\PYZus{}length\PYZus{}int}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{loan\PYZus{}amnt\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{funded\PYZus{}amnt\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{annual\PYZus{}inc\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{revol\PYZus{}bal\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{revol\PYZus{}util\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{total\PYZus{}pymnt\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{total\PYZus{}pymnt\PYZus{}inv\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{total\PYZus{}rec\PYZus{}prncp\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{total\PYZus{}rec\PYZus{}int\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{int\PYZus{}rate\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{dti\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{inq\PYZus{}last\PYZus{}6mths\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pub\PYZus{}rec\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{total\PYZus{}acc\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n}{cleandataloan}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
++---------------+--------+---------+-----------+-------------+------------+-----------+--------------+---------------+-----------------+----------------+---------------+----------------+-----------------+---------------------+---------------------+-------------------+--------------+---------+--------------------+-------------+---------------+
+|loan\_status\_int|term\_int|grade\_int|su\_grad\_int|homeowner\_int|veri\_sta\_int|purpose\_int|emp\_length\_int|loan\_amnt\_strat|funded\_amnt\_strat|annual\_inc\_strat|revol\_bal\_strat|revol\_util\_strat|total\_pymnt\_strat|total\_pymnt\_inv\_strat|total\_rec\_prncp\_strat|total\_rec\_int\_strat|int\_rate\_strat|dti\_strat|inq\_last\_6mths\_strat|pub\_rec\_strat|total\_acc\_strat|
++---------------+--------+---------+-----------+-------------+------------+-----------+--------------+---------------+-----------------+----------------+---------------+----------------+-----------------+---------------------+---------------------+-------------------+--------------+---------+--------------------+-------------+---------------+
+|              1|       1|        2|          7|            3|           2|          1|            10|              1|                1|               5|              7|               1|                3|                    3|                    2|                  1|            11|        6|                   1|            1|              1|
+|              2|       2|        3|         14|            3|           3|         13|             1|              1|                1|               6|              1|               1|                1|                    1|                    1|                  1|            16|        1|                   3|            1|              1|
+|              1|       1|        3|         15|            3|           1|         10|            10|              1|                1|               3|              2|               1|                2|                    2|                    1|                  1|            16|        2|                   2|            1|              1|
+|              1|       1|        3|         11|            3|           3|          8|            10|              2|                2|              10|              3|               1|                7|                    7|                    4|                  1|            14|        5|                   1|            1|              1|
+|              3|       2|        2|         10|            3|           3|          8|             0|              1|                1|              16|             14|               1|                2|                    2|                    1|                  1|            13|        4|                   1|            1|              1|
+|              1|       1|        1|          4|            3|           3|         12|             3|              1|                1|               8|              4|               1|                3|                    3|                    2|                  1|             8|        3|                   2|            1|              1|
+|              3|       2|        3|         15|            3|           1|          2|             8|              2|                2|              10|              9|               1|                5|                    5|                    3|                  2|            16|        5|                   1|            1|              1|
+|              1|       1|        5|         21|            3|           3|         13|             9|              1|                1|              10|              5|               1|                2|                    2|                    2|                  1|             0|        2|                   2|            1|              1|
+|              2|       2|        6|         27|            2|           3|         10|             4|              2|                2|               8|              3|               1|                1|                    1|                    1|                  1|             0|        2|                   2|            1|              1|
+|              2|       2|        2|         10|            3|           2|          8|             1|              2|                2|               3|              5|               1|                1|                    1|                    1|                  1|            13|        4|                   1|            1|              1|
++---------------+--------+---------+-----------+-------------+------------+-----------+--------------+---------------+-----------------+----------------+---------------+----------------+-----------------+---------------------+---------------------+-------------------+--------------+---------+--------------------+-------------+---------------+
+only showing top 10 rows
+
+
+    \end{Verbatim}
+
+    \hypertarget{analyze-data}{%
+\section{Analyze data}\label{analyze-data}}
+
+    \hypertarget{descriptive-statistics}{%
+\subsection{Descriptive Statistics}\label{descriptive-statistics}}
+
+    \hypertarget{here-data-set-i-am-going-to-split-in-xtrain-y-trainloan_status}{%
+\subsection{Here data set, I am going to split in Xtrain, Y
+train(loan\_status)}\label{here-data-set-i-am-going-to-split-in-xtrain-y-trainloan_status}}
+
+\hypertarget{y-train}{%
+\subsubsection{Y train:}\label{y-train}}
+
+\begin{itemize}
+\tightlist
+\item
+  loan\_status: \#\#\# Xtrain:
+\item
+  loan\_amnt: The listed amount of the loan applied for by the borrower.
+  If at some point in time, the credit department reduces the loan
+  amount, then it will be reflected in this value.
+\item
+  funded\_amnt: The total amount funded by investors for that loan at
+  that point in time.
+\item
+  term: The Number of payments on the loan. Values are in months and can
+  be either 36 or 60.
+\item
+  grade: LC assigned loan grade
+\item
+  sub\_grade: LC assigned loan subgrade
+\item
+  home\_ownership: The home ownership status provided by the borrower
+  during registration or obtained from the credit report. Our values
+  are: RENT, OWN, MORTGAGE, OTHER
+\item
+  verification\_status: The status of the loan during the listing
+  period. Values: APPROVED, NOT\_APPROVED.
+\item
+  purpose: A category provided by the borrower for the loan request.
+  Values are: debt\_consolidation, medical, home\_improvement,
+  renewable\_energy, small\_business, wedding, vacation, moving, house,
+  car, major\_purchase, credit\_card, other
+\item
+  emp\_length: Employment length in months. Possible values are whole
+  numbers from 0 and higher. Null indicates not employed.
+\item
+  int\_rate: Interest Rate on the loan
+\item
+  annual\_inc: The annual income provided by the borrower during
+  registration.
+\item
+  dti: The borrower's debt to income ratio, calculated using the monthly
+  payments on the total debt obligations, excluding mortgage, divided by
+  self-reported monthly income.
+\item
+  inq\_last\_6mths: information from the bureau last 6 months
+\item
+  pub\_rec: it indicates risk and hurts your ability to qualify for
+  credit, obligations that were not paid
+\item
+  revol\_bal: sometimes a full payment doesn't (or can't) happen, The
+  amount of credit you have versus the amount of credit you use is a
+  factor in your credit score
+\item
+  revol\_util: the amount of credit the borrower is using relative to
+  all available revolving credit.
+\item
+  total\_acc: The total Number of credit lines currently in the
+  borrower's credit file
+\item
+  total\_pymnt: The total payment currently
+\item
+  total\_pymnt\_inv: The total payment currently of investment
+\item
+  total\_rec\_prncp:
+\item
+  total\_rec\_int: interest of recollect total.
+\end{itemize}
+
+    \hypertarget{descriptive-statistic}{%
+\subsection{Descriptive Statistic}\label{descriptive-statistic}}
+
+    \hypertarget{test-balance-of-class-loan-status}{%
+\subsubsection{Test Balance of Class Loan
+Status}\label{test-balance-of-class-loan-status}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}120}]:} \PY{n}{cleandataloan}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{loan\PYZus{}status\PYZus{}int}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
++---------------+------+
+|loan\_status\_int| count|
++---------------+------+
+|              1|207723|
+|              6| 11591|
+|              3|601778|
+|              5|  6253|
+|              4|  1219|
+|              2| 45248|
+|              0| 13567|
++---------------+------+
+
+
+    \end{Verbatim}
+
+    Here I can determine that data is concentrate in two labels in loan
+status: * 1: Fully Paid * 3: Current * 2: Charged Off
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}121}]:} \PY{n}{columns1}\PY{o}{=}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{loan\PYZus{}status\PYZus{}int}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{term\PYZus{}int}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{grade\PYZus{}int}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{su\PYZus{}grad\PYZus{}int}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+          \PY{n}{columns2}\PY{o}{=}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{homeowner\PYZus{}int}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{veri\PYZus{}sta\PYZus{}int}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{purpose\PYZus{}int}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{emp\PYZus{}length\PYZus{}int}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+          \PY{n}{columns3}\PY{o}{=}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{loan\PYZus{}amnt\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{funded\PYZus{}amnt\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{annual\PYZus{}inc\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{revol\PYZus{}bal\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+          \PY{n}{columns4}\PY{o}{=}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{revol\PYZus{}util\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{total\PYZus{}pymnt\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{total\PYZus{}pymnt\PYZus{}inv\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+          \PY{n}{columns5}\PY{o}{=}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{total\PYZus{}rec\PYZus{}prncp\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{total\PYZus{}rec\PYZus{}int\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{int\PYZus{}rate\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+          \PY{n}{columns6}\PY{o}{=}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{dti\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{inq\PYZus{}last\PYZus{}6mths\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pub\PYZus{}rec\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{total\PYZus{}acc\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+          \PY{n}{cleandataloan}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{n}{columns1}\PY{p}{)}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+          \PY{n}{cleandataloan}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{n}{columns2}\PY{p}{)}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+          \PY{n}{cleandataloan}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{n}{columns3}\PY{p}{)}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+          \PY{n}{cleandataloan}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{n}{columns4}\PY{p}{)}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+          \PY{n}{cleandataloan}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{n}{columns5}\PY{p}{)}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+          \PY{n}{cleandataloan}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{n}{columns6}\PY{p}{)}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
++-------+------------------+------------------+------------------+------------------+
+|summary|   loan\_status\_int|          term\_int|         grade\_int|       su\_grad\_int|
++-------+------------------+------------------+------------------+------------------+
+|  count|            887379|            887379|            887379|            887379|
+|   mean|2.4896239374607694| 1.300045414642447| 2.798402937189183|11.959941580767632|
+| stddev| 1.005768502459213|0.4582776456114865|1.3125993531916076| 6.493018957756487|
+|    min|                 0|                 1|                 1|                 1|
+|    max|                 6|                 2|                 7|                35|
++-------+------------------+------------------+------------------+------------------+
+
++-------+------------------+------------------+------------------+------------------+
+|summary|     homeowner\_int|      veri\_sta\_int|       purpose\_int|    emp\_length\_int|
++-------+------------------+------------------+------------------+------------------+
+|  count|            887379|            887379|            887379|            887379|
+|   mean| 1.401082288402137|2.0707758466224693|2.5263365484195592| 5.720394555201329|
+| stddev|1.4293618218431805|0.8166901906175495|2.2151747854895527|3.7861190875199098|
+|    min|                 0|                 0|                 0|                 0|
+|    max|                 3|                 3|                13|                10|
++-------+------------------+------------------+------------------+------------------+
+
++-------+------------------+------------------+------------------+-----------------+
+|summary|   loan\_amnt\_strat| funded\_amnt\_strat|  annual\_inc\_strat|  revol\_bal\_strat|
++-------+------------------+------------------+------------------+-----------------+
+|  count|            887379|            887379|            887379|           887379|
+|   mean|3.3016873286386086|3.2995991566174094|15.055686465422328| 8.41287206481109|
+| stddev| 1.638707012651327|1.6378241933983295| 8.869439769700419|7.364636585357282|
+|    min|                 1|                 1|                 0|                0|
+|    max|                 7|                 7|               105|               66|
++-------+------------------+------------------+------------------+-----------------+
+
++-------+-------------------+------------------+---------------------+
+|summary|   revol\_util\_strat| total\_pymnt\_strat|total\_pymnt\_inv\_strat|
++-------+-------------------+------------------+---------------------+
+|  count|             887379|            887379|               887379|
+|   mean| 1.0002220020983144|  4.30410117886495|    4.286150562499225|
+| stddev|0.16553217354754637|3.9213697514521852|     3.90872875701831|
+|    min|                  0|                 0|                    0|
+|    max|                 63|                29|                   29|
++-------+-------------------+------------------+---------------------+
+
++-------+---------------------+-------------------+-----------------+
+|summary|total\_rec\_prncp\_strat|total\_rec\_int\_strat|   int\_rate\_strat|
++-------+---------------------+-------------------+-----------------+
+|  count|               887379|             887379|           887379|
+|   mean|     2.81938946042221|  1.332690992236688|8.754393556755344|
+| stddev|   2.5671834912309643| 0.7802717068976606|5.637956379076788|
+|    min|                    0|                  0|                0|
+|    max|                   14|                 13|               16|
++-------+---------------------+-------------------+-----------------+
+
++-------+------------------+--------------------+-------------------+-------------------+
+|summary|         dti\_strat|inq\_last\_6mths\_strat|      pub\_rec\_strat|    total\_acc\_strat|
++-------+------------------+--------------------+-------------------+-------------------+
+|  count|            887379|              887379|             887379|             887379|
+|   mean| 4.122390771023429|   1.187668403241456| 1.0042732586639982| 1.0003177898057087|
+| stddev|1.6751381185796894| 0.45228057332572313|0.09943503538166042|0.09247125840293825|
+|    min|                 0|                   0|                  0|                  0|
+|    max|                19|                  17|                 25|                 34|
++-------+------------------+--------------------+-------------------+-------------------+
+
+
+    \end{Verbatim}
+
+    Here, We can to test that not exist a stddev very high, so we can work
+with this data
+
+    \hypertarget{statistical-data}{%
+\subsubsection{Statistical Data}\label{statistical-data}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}123}]:} \PY{k+kn}{import} \PY{n+nn}{pyspark}\PY{n+nn}{.}\PY{n+nn}{mllib}\PY{n+nn}{.}\PY{n+nn}{stat} \PY{k}{as} \PY{n+nn}{st}
+          \PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{loan\PYZus{}status\PYZus{}int}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{term\PYZus{}int}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{grade\PYZus{}int}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{su\PYZus{}grad\PYZus{}int}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{homeowner\PYZus{}int}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{veri\PYZus{}sta\PYZus{}int}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{purpose\PYZus{}int}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{emp\PYZus{}length\PYZus{}int}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{loan\PYZus{}amnt\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{funded\PYZus{}amnt\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{annual\PYZus{}inc\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{revol\PYZus{}bal\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{revol\PYZus{}util\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{total\PYZus{}pymnt\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{total\PYZus{}pymnt\PYZus{}inv\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{total\PYZus{}rec\PYZus{}prncp\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{total\PYZus{}rec\PYZus{}int\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{int\PYZus{}rate\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{dti\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{inq\PYZus{}last\PYZus{}6mths\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pub\PYZus{}rec\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{total\PYZus{}acc\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+          \PY{n}{numeric\PYZus{}rdd} \PY{o}{=} \PY{n}{cleandataloan}\PY{o}{.}\PY{n}{select}\PY{p}{(}\PY{n}{columns}\PY{p}{)}\PY{o}{.}\PY{n}{rdd}\PY{o}{.}\PY{n}{map}\PY{p}{(}\PY{k}{lambda} \PY{n}{row}\PY{p}{:} \PY{p}{[}\PY{n}{e} \PY{k}{for} \PY{n}{e} \PY{o+ow}{in} \PY{n}{row}\PY{p}{]}\PY{p}{)}
+          \PY{n}{mllib\PYZus{}stats} \PY{o}{=} \PY{n}{st}\PY{o}{.}\PY{n}{Statistics}\PY{o}{.}\PY{n}{colStats}\PY{p}{(}\PY{n}{numeric\PYZus{}rdd}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{          Variable:                Mean Values}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{k}{for} \PY{n}{col}\PY{p}{,} \PY{n}{m} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{n}{columns}\PY{p}{,}\PY{n}{mllib\PYZus{}stats}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+              \PY{n+nb}{print}\PY{p}{(}\PY{n}{col}\PY{o}{.}\PY{n}{rjust}\PY{p}{(}\PY{l+m+mi}{23}\PY{p}{)} \PY{o}{+}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{           }\PY{l+s+s2}{\PYZdq{}}\PY{o}{+}\PY{n}{decode\PYZus{}variable}\PY{p}{(}\PY{n}{col}\PY{p}{,}\PY{n+nb}{int}\PY{p}{(}\PY{n}{m}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+          Variable:                Mean Values
+        loan\_status\_int           Charged\_Off
+               term\_int           36\_months
+              grade\_int           B
+            su\_grad\_int           C1
+          homeowner\_int           MORTAGE
+           veri\_sta\_int           Verified
+            purpose\_int           debt\_consolidation
+         emp\_length\_int           5 years
+        loan\_amnt\_strat           [15000 - 20000]
+      funded\_amnt\_strat           [15000 - 20000]
+       annual\_inc\_strat           [75000 - 80000]
+        revol\_bal\_strat           [16000 - 18000]
+       revol\_util\_strat           [1000 - 2000]
+      total\_pymnt\_strat           [8000 - 10000]
+  total\_pymnt\_inv\_strat           [8000 - 10000]
+  total\_rec\_prncp\_strat           [5000 - 7500]
+    total\_rec\_int\_strat           [2500 - 5000]
+         int\_rate\_strat           [8 - 9]
+              dti\_strat           [20 - 25]
+   inq\_last\_6mths\_strat           [2 - 4]
+          pub\_rec\_strat           [4 - 8]
+        total\_acc\_strat           [500 - 1000]
+
+    \end{Verbatim}
+
+    \hypertarget{correlations-between-features}{%
+\subsubsection{Correlations between
+features}\label{correlations-between-features}}
+
+    Here only print those features that have a correlation coefficient
+greater than 0.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}124}]:} \PY{n}{corrs} \PY{o}{=} \PY{n}{st}\PY{o}{.}\PY{n}{Statistics}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{n}{numeric\PYZus{}rdd}\PY{p}{)}
+          \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{el} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{corrs} \PY{o}{\PYZgt{}} \PY{l+m+mf}{0.5}\PY{p}{)}\PY{p}{:}
+              \PY{n}{correlated} \PY{o}{=} \PY{p}{[}\PY{p}{(}\PY{n}{columns}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{,} \PY{n}{corrs}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{)} \PY{k}{for} \PY{n}{j}\PY{p}{,} \PY{n}{e} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{el}\PY{p}{)} \PY{k}{if} \PY{n}{e} \PY{o}{==} \PY{l+m+mf}{1.0} \PY{o+ow}{and} \PY{n}{j} \PY{o}{!=} \PY{n}{i}\PY{p}{]}
+              \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{correlated}\PY{p}{)} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{:}
+                  \PY{k}{for} \PY{n}{e} \PY{o+ow}{in} \PY{n}{correlated}\PY{p}{:}
+                      \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}0\PYZcb{}}\PY{l+s+s1}{\PYZhy{}to\PYZhy{}}\PY{l+s+si}{\PYZob{}1\PYZcb{}}\PY{l+s+s1}{: }\PY{l+s+si}{\PYZob{}2:.2f\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{columns}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{e}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{e}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+grade\_int-to-su\_grad\_int: 0.98
+su\_grad\_int-to-grade\_int: 0.98
+loan\_amnt\_strat-to-funded\_amnt\_strat: 1.00
+funded\_amnt\_strat-to-loan\_amnt\_strat: 1.00
+total\_pymnt\_strat-to-total\_pymnt\_inv\_strat: 1.00
+total\_pymnt\_strat-to-total\_rec\_prncp\_strat: 0.96
+total\_pymnt\_strat-to-total\_rec\_int\_strat: 0.61
+total\_pymnt\_inv\_strat-to-total\_pymnt\_strat: 1.00
+total\_pymnt\_inv\_strat-to-total\_rec\_prncp\_strat: 0.96
+total\_pymnt\_inv\_strat-to-total\_rec\_int\_strat: 0.61
+total\_rec\_prncp\_strat-to-total\_pymnt\_strat: 0.96
+total\_rec\_prncp\_strat-to-total\_pymnt\_inv\_strat: 0.96
+total\_rec\_int\_strat-to-total\_pymnt\_strat: 0.61
+total\_rec\_int\_strat-to-total\_pymnt\_inv\_strat: 0.61
+
+    \end{Verbatim}
+
+    Exist a lot features highle correlated, so I am going to drop them, only
+I am going to keep 1 of each row.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}133}]:} \PY{n}{finallabel}\PY{o}{=}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{loan\PYZus{}status\PYZus{}int}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{term\PYZus{}int}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{grade\PYZus{}int}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{homeowner\PYZus{}int}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{veri\PYZus{}sta\PYZus{}int}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{purpose\PYZus{}int}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{emp\PYZus{}length\PYZus{}int}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{loan\PYZus{}amnt\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{annual\PYZus{}inc\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{revol\PYZus{}bal\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{revol\PYZus{}util\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{total\PYZus{}pymnt\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{int\PYZus{}rate\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{dti\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{inq\PYZus{}last\PYZus{}6mths\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pub\PYZus{}rec\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{total\PYZus{}acc\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+          \PY{n}{finaldataloan}\PY{o}{=}\PY{n}{cleandataloan}\PY{o}{.}\PY{n}{select}\PY{p}{(}\PY{n}{finallabel}\PY{p}{)}
+          \PY{n}{finaldataloan}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
++---------------+--------+---------+-------------+------------+-----------+--------------+---------------+----------------+---------------+----------------+-----------------+--------------+---------+--------------------+-------------+---------------+
+|loan\_status\_int|term\_int|grade\_int|homeowner\_int|veri\_sta\_int|purpose\_int|emp\_length\_int|loan\_amnt\_strat|annual\_inc\_strat|revol\_bal\_strat|revol\_util\_strat|total\_pymnt\_strat|int\_rate\_strat|dti\_strat|inq\_last\_6mths\_strat|pub\_rec\_strat|total\_acc\_strat|
++---------------+--------+---------+-------------+------------+-----------+--------------+---------------+----------------+---------------+----------------+-----------------+--------------+---------+--------------------+-------------+---------------+
+|              1|       1|        2|            3|           2|          1|            10|              1|               5|              7|               1|                3|            11|        6|                   1|            1|              1|
+|              2|       2|        3|            3|           3|         13|             1|              1|               6|              1|               1|                1|            16|        1|                   3|            1|              1|
+|              1|       1|        3|            3|           1|         10|            10|              1|               3|              2|               1|                2|            16|        2|                   2|            1|              1|
+|              1|       1|        3|            3|           3|          8|            10|              2|              10|              3|               1|                7|            14|        5|                   1|            1|              1|
+|              3|       2|        2|            3|           3|          8|             0|              1|              16|             14|               1|                2|            13|        4|                   1|            1|              1|
+|              1|       1|        1|            3|           3|         12|             3|              1|               8|              4|               1|                3|             8|        3|                   2|            1|              1|
+|              3|       2|        3|            3|           1|          2|             8|              2|              10|              9|               1|                5|            16|        5|                   1|            1|              1|
+|              1|       1|        5|            3|           3|         13|             9|              1|              10|              5|               1|                2|             0|        2|                   2|            1|              1|
+|              2|       2|        6|            2|           3|         10|             4|              2|               8|              3|               1|                1|             0|        2|                   2|            1|              1|
+|              2|       2|        2|            3|           2|          8|             1|              2|               3|              5|               1|                1|            13|        4|                   1|            1|              1|
++---------------+--------+---------+-------------+------------+-----------+--------------+---------------+----------------+---------------+----------------+-----------------+--------------+---------+--------------------+-------------+---------------+
+only showing top 10 rows
+
+
+    \end{Verbatim}
+
+    \hypertarget{visualization}{%
+\subsubsection{Visualization}\label{visualization}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}126}]:} \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+          \PY{n}{numerical}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{loan\PYZus{}status\PYZus{}int}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{int\PYZus{}rate\PYZus{}strat}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{annual\PYZus{}inc\PYZus{}strat}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{data\PYZus{}sample} \PY{o}{=} \PY{n}{finaldataloan}\PY{o}{.}\PY{n}{sampleBy}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{loan\PYZus{}status\PYZus{}int}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{p}{\PYZob{}}\PY{l+m+mi}{1}\PY{p}{:} \PY{l+m+mf}{0.0002}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{:} \PY{l+m+mf}{0.0002}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{:} \PY{l+m+mf}{0.0002}\PY{p}{\PYZcb{}}\PY{p}{)}\PY{o}{.}\PY{n}{select}\PY{p}{(}\PY{n}{numerical}\PY{p}{)}
+          \PY{n}{data\PYZus{}multi} \PY{o}{=} \PY{n+nb}{dict}\PY{p}{(}\PY{p}{[}\PY{p}{(}\PY{n}{elem}\PY{p}{,} \PY{n}{data\PYZus{}sample}\PY{o}{.}\PY{n}{select}\PY{p}{(}\PY{n}{elem}\PY{p}{)}\PY{o}{.}\PY{n}{rdd}\PY{o}{.}\PY{n}{flatMap}\PY{p}{(}\PY{k}{lambda} \PY{n}{row}\PY{p}{:} \PY{n}{row}\PY{p}{)}\PY{o}{.}\PY{n}{collect}\PY{p}{(}\PY{p}{)}\PY{p}{)} \PY{k}{for} \PY{n}{elem} \PY{o+ow}{in} \PY{n}{numerical}\PY{p}{]}\PY{p}{)}
+          \PY{n}{x1}\PY{o}{=}\PY{n}{data\PYZus{}multi}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{int\PYZus{}rate\PYZus{}strat}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{x2}\PY{o}{=}\PY{n}{data\PYZus{}multi}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{annual\PYZus{}inc\PYZus{}strat}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{y}\PY{o}{=}\PY{n}{data\PYZus{}multi}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{loan\PYZus{}status\PYZus{}int}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}127}]:} \PY{n}{N} \PY{o}{=} \PY{l+m+mi}{50}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{x1}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{x2}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Int Rate Vs Loan Status}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_51_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{convert-data-set-to-labeled-points}{%
+\subsubsection{Convert Data Set to Labeled
+Points}\label{convert-data-set-to-labeled-points}}
+
+    A LabeledPoint is a MLlib structure that is used to train the machine
+learning models. It consists of two attributes: label and features
+
+    \hypertarget{splitting-into-training-and-testing}{%
+\paragraph{Splitting into training and
+testing}\label{splitting-into-training-and-testing}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}131}]:} \PY{n}{loan\PYZus{}train}\PY{p}{,} \PY{n}{loan\PYZus{}test} \PY{o}{=} \PY{n}{finaldataloan}\PY{o}{.}\PY{n}{randomSplit}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{0.7}\PY{p}{,} \PY{l+m+mf}{0.3}\PY{p}{]}\PY{p}{)}
+          \PY{n}{loan\PYZus{}train}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
++---------------+--------+---------+-------------+------------+-----------+--------------+---------------+----------------+---------------+----------------+-----------------+--------------+---------+--------------------+-------------+---------------+
+|loan\_status\_int|term\_int|grade\_int|homeowner\_int|veri\_sta\_int|purpose\_int|emp\_length\_int|loan\_amnt\_strat|annual\_inc\_strat|revol\_bal\_strat|revol\_util\_strat|total\_pymnt\_strat|int\_rate\_strat|dti\_strat|inq\_last\_6mths\_strat|pub\_rec\_strat|total\_acc\_strat|
++---------------+--------+---------+-------------+------------+-----------+--------------+---------------+----------------+---------------+----------------+-----------------+--------------+---------+--------------------+-------------+---------------+
+|              0|       1|        1|            0|           1|          1|             3|              3|              28|              0|               1|                8|             8|        4|                   1|            1|              1|
+|              0|       1|        1|            0|           1|          1|             7|              3|              15|              5|               1|                6|             9|        2|                   1|            1|              1|
+|              0|       1|        1|            0|           1|          2|             0|              1|               9|             58|               1|                3|             8|        5|                   1|            1|              1|
+|              0|       1|        1|            0|           1|          2|             4|              3|              18|              3|               1|                6|             7|        5|                   1|            1|              1|
+|              0|       1|        1|            0|           1|          2|             6|              2|              16|              5|               1|                6|             8|        4|                   3|            1|              1|
++---------------+--------+---------+-------------+------------+-----------+--------------+---------------+----------------+---------------+----------------+-----------------+--------------+---------+--------------------+-------------+---------------+
+only showing top 5 rows
+
+
+    \end{Verbatim}
+
+    \hypertarget{predicting-loan-status-through-logistic-regression}{%
+\paragraph{Predicting Loan Status through Logistic
+Regression}\label{predicting-loan-status-through-logistic-regression}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}132}]:} \PY{k+kn}{import} \PY{n+nn}{pyspark}\PY{n+nn}{.}\PY{n+nn}{ml}\PY{n+nn}{.}\PY{n+nn}{classification} \PY{k}{as} \PY{n+nn}{cl}
+          \PY{k+kn}{import} \PY{n+nn}{pyspark}\PY{n+nn}{.}\PY{n+nn}{ml}\PY{n+nn}{.}\PY{n+nn}{feature} \PY{k}{as} \PY{n+nn}{ft}
+          \PY{k+kn}{from} \PY{n+nn}{pyspark}\PY{n+nn}{.}\PY{n+nn}{ml} \PY{k}{import} \PY{n}{Pipeline}
+          \PY{k+kn}{import} \PY{n+nn}{pyspark}\PY{n+nn}{.}\PY{n+nn}{sql}\PY{n+nn}{.}\PY{n+nn}{types} \PY{k}{as} \PY{n+nn}{typ}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}136}]:} \PY{n}{inputlabel}\PY{o}{=}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{term\PYZus{}int}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{grade\PYZus{}int}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{homeowner\PYZus{}int}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{veri\PYZus{}sta\PYZus{}int}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{purpose\PYZus{}int}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{emp\PYZus{}length\PYZus{}int}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{loan\PYZus{}amnt\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{annual\PYZus{}inc\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{revol\PYZus{}bal\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{revol\PYZus{}util\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{total\PYZus{}pymnt\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{int\PYZus{}rate\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{dti\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{inq\PYZus{}last\PYZus{}6mths\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pub\PYZus{}rec\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{total\PYZus{}acc\PYZus{}strat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+          \PY{n}{outputlabel}\PY{o}{=}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{loan\PYZus{}status\PYZus{}int}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+          \PY{n}{encoder} \PY{o}{=} \PY{n}{ft}\PY{o}{.}\PY{n}{OneHotEncoder}\PY{p}{(}\PY{n}{inputCol}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{term\PYZus{}int}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{outputCol}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{term\PYZus{}vec}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{featuresCreator} \PY{o}{=} \PY{n}{ft}\PY{o}{.}\PY{n}{VectorAssembler}\PY{p}{(}\PY{n}{inputCols}\PY{o}{=}\PY{n}{inputlabel}\PY{p}{,}\PY{n}{outputCol}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{features}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{logistic} \PY{o}{=} \PY{n}{cl}\PY{o}{.}\PY{n}{LogisticRegression}\PY{p}{(}\PY{n}{maxIter}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,}\PY{n}{regParam}\PY{o}{=}\PY{l+m+mf}{0.01}\PY{p}{,}\PY{n}{labelCol}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{loan\PYZus{}status\PYZus{}int}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{pipeline} \PY{o}{=} \PY{n}{Pipeline}\PY{p}{(}\PY{n}{stages}\PY{o}{=}\PY{p}{[}\PY{n}{encoder}\PY{p}{,}\PY{n}{featuresCreator}\PY{p}{,}\PY{n}{logistic}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Exception ignored in: <object repr() failed>
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.5/dist-packages/pyspark/ml/wrapper.py", line 105, in \_\_del\_\_
+    SparkContext.\_active\_spark\_context.\_gateway.detach(self.\_java\_obj)
+AttributeError: 'VectorAssembler' object has no attribute '\_java\_obj'
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}137}]:} \PY{n}{model} \PY{o}{=} \PY{n}{pipeline}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{loan\PYZus{}train}\PY{p}{)}
+          \PY{n}{test\PYZus{}model} \PY{o}{=} \PY{n}{model}\PY{o}{.}\PY{n}{transform}\PY{p}{(}\PY{n}{loan\PYZus{}test}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}138}]:} \PY{n}{test\PYZus{}model}\PY{o}{.}\PY{n}{take}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}138}]:} [Row(loan\_status\_int=0, term\_int=1, grade\_int=1, homeowner\_int=0, veri\_sta\_int=1, purpose\_int=0, emp\_length\_int=2, loan\_amnt\_strat=2, annual\_inc\_strat=12, revol\_bal\_strat=1, revol\_util\_strat=0, total\_pymnt\_strat=1, int\_rate\_strat=9, dti\_strat=0, inq\_last\_6mths\_strat=0, pub\_rec\_strat=3, total\_acc\_strat=1, term\_vec=SparseVector(2, \{1: 1.0\}), features=DenseVector([1.0, 1.0, 0.0, 1.0, 0.0, 2.0, 2.0, 12.0, 1.0, 0.0, 1.0, 9.0, 0.0, 0.0, 3.0, 1.0]), rawPrediction=DenseVector([-1.0614, 2.5037, -0.059, 5.1424, -2.8419, -2.3397, -1.3441]), probability=DenseVector([0.0019, 0.0661, 0.0051, 0.9247, 0.0003, 0.0005, 0.0014]), prediction=3.0)]
+\end{Verbatim}
+            
+    \hypertarget{evaluating-the-performance-of-the-model}{%
+\subsubsection{Evaluating the performance of the
+model}\label{evaluating-the-performance-of-the-model}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}139}]:} \PY{k+kn}{import} \PY{n+nn}{pyspark}\PY{n+nn}{.}\PY{n+nn}{ml}\PY{n+nn}{.}\PY{n+nn}{evaluation} \PY{k}{as} \PY{n+nn}{ev}
+\end{Verbatim}
+
+
+    The BinaryClassficationEvaluator is used to test how well our model
+performed
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}140}]:} \PY{n}{evaluator} \PY{o}{=} \PY{n}{ev}\PY{o}{.}\PY{n}{BinaryClassificationEvaluator}\PY{p}{(}\PY{n}{rawPredictionCol}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{probability}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{labelCol}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{loan\PYZus{}status\PYZus{}int}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    The performance of the model
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}141}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{evaluator}\PY{o}{.}\PY{n}{evaluate}\PY{p}{(}\PY{n}{test\PYZus{}model}\PY{p}{,}\PY{p}{\PYZob{}}\PY{n}{evaluator}\PY{o}{.}\PY{n}{metricName}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{areaUnderROC}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{evaluator}\PY{o}{.}\PY{n}{evaluate}\PY{p}{(}\PY{n}{test\PYZus{}model}\PY{p}{,}\PY{p}{\PYZob{}}\PY{n}{evaluator}\PY{o}{.}\PY{n}{metricName}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{areaUnderPR}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0.6256140798649927
+0.9899859027896035
+
+    \end{Verbatim}
+
+    The area under the ROC of 62.56\% and area under PR of 98.99\% shows a
+well-defined model.
+
+    \hypertarget{saving-the-model}{%
+\subsubsection{Saving the model}\label{saving-the-model}}
+
+    \hypertarget{save-the-pipeline}{%
+\paragraph{Save the Pipeline}\label{save-the-pipeline}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}142}]:} \PY{n}{pipelinePath} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{LoanStatus\PYZus{}Logistic\PYZus{}Pipeline}\PY{l+s+s1}{\PYZsq{}}
+          \PY{n}{pipeline}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{overwrite}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{save}\PY{p}{(}\PY{n}{pipelinePath}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}144}]:} \PY{n}{loadedPipeline} \PY{o}{=} \PY{n}{Pipeline}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{n}{pipelinePath}\PY{p}{)}
+          \PY{n}{loadedPipeline}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{loan\PYZus{}train}\PY{p}{)}\PY{o}{.}\PY{n}{transform}\PY{p}{(}\PY{n}{loan\PYZus{}test}\PY{p}{)}\PY{o}{.}\PY{n}{take}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}144}]:} [Row(loan\_status\_int=0, term\_int=1, grade\_int=1, homeowner\_int=0, veri\_sta\_int=1, purpose\_int=0, emp\_length\_int=2, loan\_amnt\_strat=2, annual\_inc\_strat=12, revol\_bal\_strat=1, revol\_util\_strat=0, total\_pymnt\_strat=1, int\_rate\_strat=9, dti\_strat=0, inq\_last\_6mths\_strat=0, pub\_rec\_strat=3, total\_acc\_strat=1, term\_vec=SparseVector(2, \{1: 1.0\}), features=DenseVector([1.0, 1.0, 0.0, 1.0, 0.0, 2.0, 2.0, 12.0, 1.0, 0.0, 1.0, 9.0, 0.0, 0.0, 3.0, 1.0]), rawPrediction=DenseVector([-1.0614, 2.5037, -0.059, 5.1424, -2.8419, -2.3397, -1.3441]), probability=DenseVector([0.0019, 0.0661, 0.0051, 0.9247, 0.0003, 0.0005, 0.0014]), prediction=3.0)]
+\end{Verbatim}
+            
+    \hypertarget{save-the-model}{%
+\paragraph{Save the model}\label{save-the-model}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}145}]:} \PY{k+kn}{from} \PY{n+nn}{pyspark}\PY{n+nn}{.}\PY{n+nn}{ml} \PY{k}{import} \PY{n}{PipelineModel}
+          \PY{n}{modelPath} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{LoanStatus\PYZus{}Logistic\PYZus{}PipelineModel}\PY{l+s+s1}{\PYZsq{}}
+          \PY{n}{model}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{overwrite}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{save}\PY{p}{(}\PY{n}{modelPath}\PY{p}{)}
+          \PY{n}{loadedPipelineModel} \PY{o}{=} \PY{n}{PipelineModel}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{n}{modelPath}\PY{p}{)}
+          \PY{n}{test\PYZus{}reloadedModel} \PY{o}{=} \PY{n}{loadedPipelineModel}\PY{o}{.}\PY{n}{transform}\PY{p}{(}\PY{n}{loan\PYZus{}test}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}146}]:} \PY{n}{test\PYZus{}reloadedModel}\PY{o}{.}\PY{n}{take}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}146}]:} [Row(loan\_status\_int=0, term\_int=1, grade\_int=1, homeowner\_int=0, veri\_sta\_int=1, purpose\_int=0, emp\_length\_int=2, loan\_amnt\_strat=2, annual\_inc\_strat=12, revol\_bal\_strat=1, revol\_util\_strat=0, total\_pymnt\_strat=1, int\_rate\_strat=9, dti\_strat=0, inq\_last\_6mths\_strat=0, pub\_rec\_strat=3, total\_acc\_strat=1, term\_vec=SparseVector(2, \{1: 1.0\}), features=DenseVector([1.0, 1.0, 0.0, 1.0, 0.0, 2.0, 2.0, 12.0, 1.0, 0.0, 1.0, 9.0, 0.0, 0.0, 3.0, 1.0]), rawPrediction=DenseVector([-1.0614, 2.5037, -0.059, 5.1424, -2.8419, -2.3397, -1.3441]), probability=DenseVector([0.0019, 0.0661, 0.0051, 0.9247, 0.0003, 0.0005, 0.0014]), prediction=3.0)]
+\end{Verbatim}
+            
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
