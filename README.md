@@ -2,6 +2,13 @@
 
 In this work going to analyze how use pyspark in an big data anlysis.
 
+### How to Begin this Work ###
+
+In the files of this work exist a file called "FinalProject.ipynb", in this file only you have to run this box of code,
+each box has a header explain what is the meaning.
+
+This python jupyter file has been tested many times, offering quality in the code
+
 ### Data Set ###
 
 The data set used in this work has 887379 observations and 75 features to evaluate model.
